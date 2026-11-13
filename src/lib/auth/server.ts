@@ -14,8 +14,12 @@ export function credentials(): Credentials | null {
 export const MISSING_LOGIN = "Set AUTH_USERNAME and AUTH_PASSWORD in .env (see .env.example), then restart.";
 
 export async function isSignedIn() {
+  // Read the cookie first, even without a login set. That's what marks a page as per-request: the
+  // Docker build runs without .env, and an early return here would let Next prerender every page as a
+  // static redirect to /login, which loops with the login page once you're signed in.
+  const session = (await cookies()).get(SESSION_COOKIE)?.value;
   const creds = credentials();
-  return !!creds && verifySession(creds, (await cookies()).get(SESSION_COOKIE)?.value);
+  return !!creds && verifySession(creds, session);
 }
 
 // For route handlers: null when signed in, else the 401 to return. The proxy checks first; this makes
