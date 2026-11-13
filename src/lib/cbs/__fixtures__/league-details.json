@@ -1,0 +1,32 @@
+{
+  "statusMessage": "OK",
+  "statusCode": 200,
+  "uri": "/league/details",
+  "uriAlias": "/league/details",
+  "body": {
+    "league_details": {
+      "effective_period": "10",
+      "regular_season_periods": 14,
+      "playoff_periods": "4",
+      "draft_type": "offline",
+      "is_h2h": "1",
+      "keeper_policy": "owners_set",
+      "is_ppr": 1,
+      "current_period": "10",
+      "draft_label": "Pre-season",
+      "is_expired": 0,
+      "max_keepers": 2,
+      "default_rankings_timeframe": "weekly",
+      "is_pts": "1",
+      "type": "mgmt",
+      "uses_keepers": 1,
+      "keeper_deadline": "20260831",
+      "effective_point": "10",
+      "scoring_periods": 18,
+      "name": "Huntington Beach FFL",
+      "season_status": "regularseason",
+      "service_level": "gold",
+      "num_teams": 10
+    }
+  }
+}

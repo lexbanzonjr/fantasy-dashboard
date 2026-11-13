@@ -1,0 +1,18 @@
+services:
+  fantasy-dashboard:
+    build: .
+    image: fantasy-dashboard
+    container_name: fantasy-dashboard
+    init: true
+    restart: unless-stopped
+    ports:
+      # Open to your LAN, behind the login (AUTH_USERNAME / AUTH_PASSWORD in .env).
+      # Use "127.0.0.1:6972:6972" to restrict it to this machine.
+      - "6972:6972"
+    # Login, NEXT_PUBLIC_SITE_URL and CBS_TOKEN_KEY. The values below win over it.
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+    volumes:
+      # The SQLite database. Back up this folder.
+      - "./data:/data"

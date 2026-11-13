@@ -1,0 +1,208 @@
+{
+  "statusMessage": "OK",
+  "body": {
+    "teams": [
+      {
+        "abbr": "FLD",
+        "is_vacant": 0,
+        "long_abbr": "FLD",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-1",
+            "name": "name-2"
+          }
+        ],
+        "name": "Foot Long Dong",
+        "budget_remaining": 79,
+        "division": "",
+        "logo": "http://sports.cbsimg.net/images/fantasy/teams/f.png?width=100&height=100",
+        "short_name": "Foot L",
+        "id": "15"
+      },
+      {
+        "abbr": "ITT",
+        "is_vacant": 0,
+        "long_abbr": "Misfits",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-3",
+            "name": "name-4"
+          }
+        ],
+        "name": "Little Misfits",
+        "budget_remaining": 85,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/25-1760512329.jpg?width=100&height=100",
+        "short_name": "Little",
+        "id": "25"
+      },
+      {
+        "abbr": "MOD",
+        "is_vacant": 0,
+        "budget_remaining": 57,
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/23-1633389839.jpg?width=100&height=100",
+        "short_name": "Minist",
+        "logged_in_team": 1,
+        "long_abbr": "MOD",
+        "name": "Minister of Defense",
+        "owners": [
+          {
+            "commissioner": 0,
+            "logged_in_owner": 1,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-5",
+            "name": "name-6"
+          }
+        ],
+        "division": "",
+        "id": "23"
+      },
+      {
+        "abbr": "Mud",
+        "is_vacant": 0,
+        "long_abbr": "Mudshark",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-7",
+            "name": "name-8"
+          },
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-9",
+            "name": "name-10"
+          }
+        ],
+        "name": "Mudsharks",
+        "budget_remaining": 30,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/1-12144.gif?width=100&height=100",
+        "short_name": "Mudsha",
+        "id": "1"
+      },
+      {
+        "abbr": "Crush",
+        "is_vacant": 0,
+        "long_abbr": "Crush",
+        "owners": [
+          {
+            "commissioner": 1,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-11",
+            "name": "name-12"
+          }
+        ],
+        "name": "Orange Crush Crusade",
+        "budget_remaining": 61,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/19-1725514035.jpg?width=100&height=100",
+        "short_name": "Orange",
+        "id": "19"
+      },
+      {
+        "abbr": "SC",
+        "is_vacant": 0,
+        "long_abbr": "CSharpe",
+        "owners": [
+          {
+            "commissioner": 1,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-13",
+            "name": "name-14"
+          }
+        ],
+        "name": "Sharpe Cheddah",
+        "budget_remaining": 52,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/10-3459.jpg?width=100&height=100",
+        "short_name": "Sharpe",
+        "id": "10"
+      },
+      {
+        "abbr": "SNB",
+        "is_vacant": 0,
+        "long_abbr": "SNB",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-15",
+            "name": "name-16"
+          }
+        ],
+        "name": "Silver N Black",
+        "budget_remaining": 72,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/16-11715.jpg?width=100&height=100",
+        "short_name": "Silver",
+        "id": "16"
+      },
+      {
+        "abbr": "SD",
+        "is_vacant": 0,
+        "long_abbr": "Devils",
+        "owners": [
+          {
+            "commissioner": 1,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-17",
+            "name": "name-18"
+          }
+        ],
+        "name": "Sun Devils",
+        "budget_remaining": 88,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/17-29671.jpg?width=100&height=100",
+        "short_name": "Sun De",
+        "id": "17"
+      },
+      {
+        "abbr": "TKT",
+        "is_vacant": 0,
+        "long_abbr": "Nee",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-19",
+            "name": "name-20"
+          }
+        ],
+        "name": "The Knights That Say Nee",
+        "budget_remaining": 39,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/21-129399.jpg?width=100&height=100",
+        "short_name": "The Kn",
+        "id": "21"
+      },
+      {
+        "abbr": "SMY",
+        "is_vacant": 0,
+        "long_abbr": "Samps",
+        "owners": [
+          {
+            "commissioner": 0,
+            "playoff_add_drops_disabled": 0,
+            "id": "id-21",
+            "name": "name-22"
+          }
+        ],
+        "name": "The Sampsonites ",
+        "budget_remaining": 17,
+        "division": "",
+        "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/22-1131251.gif?width=100&height=100",
+        "short_name": "The Sa",
+        "id": "22"
+      }
+    ]
+  },
+  "uri": "/league/teams",
+  "statusCode": 200,
+  "uriAlias": "/league/teams"
+}
