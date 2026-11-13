@@ -1,0 +1,1666 @@
+{
+  "statusMessage": "OK",
+  "statusCode": 200,
+  "uri": "/league/rosters",
+  "uriAlias": "/league/rosters",
+  "body": {
+    "rosters": {
+      "point": "10",
+      "period": "10",
+      "teams": [
+        {
+          "long_abbr": "FLD",
+          "division": "",
+          "point": "10",
+          "short_name": "Foot L",
+          "id": "15",
+          "is_vacant": 0,
+          "players": [
+            {
+              "percentstarted": "98%",
+              "home_game": 0,
+              "avg_points": "12.62",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2181054.png",
+              "eligible_for_il": 1,
+              "firstname": "Josh",
+              "on_waivers": 0,
+              "bye_week": "7",
+              "elias_id": "ALL529264",
+              "age": 30,
+              "pro_status": "A",
+              "ytd_points": 101,
+              "lastname": "Allen",
+              "position": "QB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2181054",
+              "eligible": "QB",
+              "oprk": 27,
+              "fullname": "Josh Allen",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 1,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2181054",
+              "jersey": "17",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-108",
+                    "total": "51",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-8"
+                      },
+                      "team_abbr": "BUF"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+8"
+                      },
+                      "team_abbr": "NYJ"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Josh Allen QB BUF' href='https://jjhbffl.football.cbssports.com/players/playerpage/2181054'>Josh Allen</a> <span class=\"playerPositionAndTeam\">QB &#149; BUF</span> ",
+              "percentowned": "100%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+400"
+                  }
+                ],
+                "stats_categories": {
+                  "PaInt": {
+                    "name": "Interceptions",
+                    "short_name": "Passing Interceptions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "+130"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-175"
+                    },
+                    "line": 0.5
+                  },
+                  "RuAtt": {
+                    "name": "Carries",
+                    "short_name": "Rush Attempts",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-120"
+                    },
+                    "line": 6.5
+                  },
+                  "RuYd": {
+                    "name": "Rushing Yards",
+                    "short_name": "Rushing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-120"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-110"
+                    },
+                    "line": 26.5
+                  },
+                  "PaYd": {
+                    "name": "Passing Yards",
+                    "short_name": "Passing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "line": 231.5
+                  },
+                  "PaTD": {
+                    "name": "Pass TDs",
+                    "short_name": "Passing Touchdowns",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-161"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "+120"
+                    },
+                    "line": 1.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/4.gif",
+                  "game_id": 50029310,
+                  "point": "10",
+                  "weather": "Partly cloudy. Cool.",
+                  "weather_icon_code": "4",
+                  "game_abbr": "NFL_20261115_BUF@NYJ",
+                  "time": 1794765600,
+                  "weather_icon_name": "partly_cloudy",
+                  "abbrev": "@NYJ",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 50&deg;F, Lo: 39&deg;F"
+                }
+              ],
+              "projected_points": "12.4",
+              "eligible_positions_display": "QB",
+              "headline": "Bills' Josh Allen: Survives Vikes D in win",
+              "pro_team": "BUF",
+              "opponent_team": "NYJ",
+              "opponent": "@NYJ",
+              "roster_pos": "QB",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "98%",
+              "home_game": 1,
+              "avg_points": "7.56",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2061188.png",
+              "eligible_for_il": 1,
+              "firstname": "Derrick",
+              "on_waivers": 0,
+              "bye_week": "13",
+              "elias_id": "HEN602843",
+              "age": 32,
+              "pro_status": "A",
+              "ytd_points": 68,
+              "lastname": "Henry",
+              "position": "RB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2061188",
+              "eligible": "RB,RB-WR-TE",
+              "oprk": 22,
+              "fullname": "Derrick Henry",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 1,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2061188",
+              "jersey": "22",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "38.5",
+                    "selection_ids": null,
+                    "under_odds": "-108"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "+4.5"
+                      },
+                      "team_abbr": "LAC"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "-4.5"
+                      },
+                      "team_abbr": "BAL"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794878100,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Derrick Henry RB BAL' href='https://jjhbffl.football.cbssports.com/players/playerpage/2061188'>Derrick Henry</a> <span class=\"playerPositionAndTeam\">RB &#149; BAL</span>",
+              "percentowned": "100%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+320"
+                  }
+                ],
+                "stats_categories": {
+                  "RuAtt": {
+                    "name": "Carries",
+                    "short_name": "Rush Attempts",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "+100"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-133"
+                    },
+                    "line": 19.5
+                  },
+                  "RuYd": {
+                    "name": "Rushing Yards",
+                    "short_name": "Rushing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "line": 76.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/1.gif",
+                  "game_id": 50029316,
+                  "point": "10",
+                  "weather": "Sunny. Cool.",
+                  "weather_icon_code": "1",
+                  "game_abbr": "NFL_20261116_LAC@BAL",
+                  "time": 1794878100,
+                  "weather_icon_name": "sunny",
+                  "abbrev": "LAC",
+                  "venuetype": "Outside",
+                  "home_team": "false",
+                  "temperature": "Hi: 55&deg;F, Lo: 34&deg;F"
+                }
+              ],
+              "projected_points": "6.3",
+              "eligible_positions_display": "RB",
+              "headline": null,
+              "pro_team": "BAL",
+              "opponent_team": "LAC",
+              "opponent": "LAC",
+              "roster_pos": "RB",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "99%",
+              "home_game": 0,
+              "avg_points": "6.22",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/3121836.png",
+              "eligible_for_il": 1,
+              "firstname": "Kyren",
+              "on_waivers": 0,
+              "bye_week": "11",
+              "elias_id": "WIL415359",
+              "age": 26,
+              "pro_status": "A",
+              "ytd_points": 56,
+              "lastname": "Williams",
+              "position": "RB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "3121836",
+              "eligible": "RB,RB-WR-TE",
+              "oprk": 16,
+              "fullname": "Kyren Williams",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/3121836",
+              "jersey": "23",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "39.5",
+                    "selection_ids": null,
+                    "under_odds": "-108"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "-9.5"
+                      },
+                      "team_abbr": "LAR"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "+9.5"
+                      },
+                      "team_abbr": "ARI"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794776700,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Kyren Williams RB LAR' href='https://jjhbffl.football.cbssports.com/players/playerpage/3121836'>Kyren Williams</a> <span class=\"playerPositionAndTeam\">RB &#149; LAR</span> ",
+              "percentowned": "100%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+325"
+                  }
+                ],
+                "stats_categories": {
+                  "RuReYd": {
+                    "name": "Rush + Rec Yards",
+                    "short_name": "Rushing & Receiving Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "line": 92.5
+                  },
+                  "RuYd": {
+                    "name": "Rushing Yards",
+                    "short_name": "Rushing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-120"
+                    },
+                    "line": 67.5
+                  },
+                  "ReYd": {
+                    "name": "Receiving Yards",
+                    "short_name": "Receiving Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "+100"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-133"
+                    },
+                    "line": 21.5
+                  },
+                  "Recpt": {
+                    "name": "Receptions",
+                    "short_name": "Receptions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-161"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "+120"
+                    },
+                    "line": 2.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/4.gif",
+                  "game_id": 50029312,
+                  "point": "10",
+                  "weather": "Morning clouds. Mild.",
+                  "weather_icon_code": "4",
+                  "game_abbr": "NFL_20261115_LAR@ARI",
+                  "time": 1794776700,
+                  "weather_icon_name": "dome",
+                  "abbrev": "@ARI",
+                  "venuetype": "Retractable Dome",
+                  "home_team": "true",
+                  "temperature": "Hi: 75&deg;F, Lo: 54&deg;F"
+                }
+              ],
+              "projected_points": "8.2",
+              "eligible_positions_display": "RB",
+              "headline": "Rams' Kyren Williams: Bottled up by Commanders",
+              "pro_team": "LAR",
+              "opponent_team": "ARI",
+              "opponent": "@ARI",
+              "roster_pos": "RB",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "77%",
+              "home_game": 0,
+              "avg_points": "2.67",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2179328.png",
+              "eligible_for_il": 1,
+              "firstname": "DJ",
+              "on_waivers": 0,
+              "bye_week": "7",
+              "elias_id": "MOO272423",
+              "age": 29,
+              "pro_status": "A",
+              "ytd_points": 16,
+              "lastname": "Moore",
+              "position": "WR",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2179328",
+              "eligible": "WR-TE,RB-WR-TE",
+              "oprk": 15,
+              "fullname": "DJ Moore",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2179328",
+              "jersey": "2",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-108",
+                    "total": "51",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-8"
+                      },
+                      "team_abbr": "BUF"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+8"
+                      },
+                      "team_abbr": "NYJ"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' DJ Moore WR BUF' href='https://jjhbffl.football.cbssports.com/players/playerpage/2179328'>DJ Moore</a> <span class=\"playerPositionAndTeam\">WR &#149; BUF</span> ",
+              "percentowned": "99%",
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/4.gif",
+                  "game_id": 50029310,
+                  "point": "10",
+                  "weather": "Partly cloudy. Cool.",
+                  "weather_icon_code": "4",
+                  "game_abbr": "NFL_20261115_BUF@NYJ",
+                  "time": 1794765600,
+                  "weather_icon_name": "partly_cloudy",
+                  "abbrev": "@NYJ",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 50&deg;F, Lo: 39&deg;F"
+                }
+              ],
+              "projected_points": "3.9",
+              "eligible_positions_display": "WR",
+              "headline": "Bills' DJ Moore: WRs to Start",
+              "pro_team": "BUF",
+              "opponent_team": "NYJ",
+              "opponent": "@NYJ",
+              "roster_pos": "WR-TE",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "6%",
+              "avg_points": "2.11",
+              "no_longer_eligible_for_ml": 0,
+              "injury": "Concussion",
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2962110.png",
+              "eligible_for_il": 1,
+              "firstname": "Jaylen",
+              "on_waivers": 0,
+              "bye_week": "10",
+              "elias_id": "WAD088683",
+              "age": 27,
+              "pro_status": "A",
+              "ytd_points": 19,
+              "lastname": "Waddle",
+              "position": "WR",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2962110",
+              "eligible": "WR-TE,RB-WR-TE",
+              "fullname": "Jaylen Waddle",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "return": "Questionable for Week 11 vs. Las Vegas",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2962110",
+              "jersey": "17",
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Jaylen Waddle WR DEN' href='https://jjhbffl.football.cbssports.com/players/playerpage/2962110'>Jaylen Waddle</a> <span class=\"playerPositionAndTeam\">WR &#149; DEN</span> <span class=\"playerIconsWrapper\"><span title=\"Cold Player\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2962110\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Status: Cold Player\"><span class=\"icon-news-note-cold\"></span></a></span><span title=\"Concussion: Questionable for Week 11 vs. Las Vegas\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2962110\" subtab=\"Injury Report\" class=\"playerLink\" aria-label=\"Injury Report: Concussion: Questionable for Week 11 vs. Las Vegas\"><span class=\"icon-red_cross\"></span></a></span></span>",
+              "percentowned": "90%",
+              "opponents": [
+                {
+                  "game_id": null,
+                  "abbrev": "BYE",
+                  "venuetype": "Outside",
+                  "point": "10",
+                  "game_abbr": null,
+                  "time": null
+                }
+              ],
+              "projected_points": "0.0",
+              "eligible_positions_display": "WR",
+              "headline": "",
+              "pro_team": "DEN",
+              "opponent": null,
+              "roster_pos": "WR-TE",
+              "icons": {
+                "cold": 1,
+                "injury": "Concussion: Questionable for Week 11 vs. Las Vegas"
+              },
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "13%",
+              "home_game": 0,
+              "avg_points": "1.71",
+              "no_longer_eligible_for_ml": 0,
+              "injury": "Hamstring",
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/26701883.png",
+              "eligible_for_il": 1,
+              "firstname": "Marvin",
+              "on_waivers": 0,
+              "bye_week": "8",
+              "elias_id": "HAR648677",
+              "age": 24,
+              "pro_status": "A",
+              "ytd_points": 12,
+              "lastname": "Harrison Jr.",
+              "position": "WR",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "26701883",
+              "eligible": "WR-TE,RB-WR-TE",
+              "oprk": 9,
+              "fullname": "Marvin Harrison Jr.",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "return": "Did Not Practice on Thursday. Questionable for Week 10 at Cleveland",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/26701883",
+              "jersey": "18",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-105",
+                    "total": "40.5",
+                    "selection_ids": null,
+                    "under_odds": "-114"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "-4.5"
+                      },
+                      "team_abbr": "HOU"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "+4.5"
+                      },
+                      "team_abbr": "CLE"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Marvin Harrison Jr. WR HOU' href='https://jjhbffl.football.cbssports.com/players/playerpage/26701883'>Marvin Harrison Jr.</a> <span class=\"playerPositionAndTeam\">WR &#149; HOU</span> <span class=\"playerIconsWrapper\"><span title=\"Texans' Marvin Harrison: Not seen at Friday's practice\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/26701883\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Update: Texans' Marvin Harrison: Not seen at Friday's practice\"><span class=\"icon-news-note-recent\"></span></a></span><span title=\"Hamstring: Did Not Practice on Thursday. Questionable for Week 10 at Cleveland\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/26701883\" subtab=\"Injury Report\" class=\"playerLink\" aria-label=\"Injury Report: Hamstring: Did Not Practice on Thursday. Questionable for Week 10 at Cleveland\"><span class=\"icon-red_cross\"></span></a></span></span>",
+              "percentowned": "72%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+2200"
+                  }
+                ]
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/18.gif",
+                  "game_id": 50029306,
+                  "point": "10",
+                  "weather": "Sprinkles. Overcast. Cool.",
+                  "weather_icon_code": "18",
+                  "game_abbr": "NFL_20261115_HOU@CLE",
+                  "time": 1794765600,
+                  "weather_icon_name": "rain",
+                  "abbrev": "@CLE",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 47&deg;F, Lo: 43&deg;F"
+                }
+              ],
+              "projected_points": "1.8",
+              "eligible_positions_display": "WR",
+              "headline": "Texans' Marvin Harrison: Not seen at Friday's practice",
+              "pro_team": "HOU",
+              "opponent_team": "CLE",
+              "opponent": "@CLE",
+              "roster_pos": "WR-TE",
+              "on_waivers_until": null,
+              "icons": {
+                "headline": "Texans' Marvin Harrison: Not seen at Friday's practice",
+                "injury": "Hamstring: Did Not Practice on Thursday. Questionable for Week 10 at Cleveland"
+              }
+            },
+            {
+              "percentstarted": "26%",
+              "home_game": 0,
+              "avg_points": "3.25",
+              "no_longer_eligible_for_ml": 0,
+              "injury": "Hand",
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2964667.png",
+              "eligible_for_il": 1,
+              "firstname": "Chris",
+              "on_waivers": 0,
+              "bye_week": "7",
+              "elias_id": "ROD797090",
+              "age": 27,
+              "pro_status": "A",
+              "ytd_points": 26,
+              "lastname": "Rodriguez Jr.",
+              "position": "RB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2964667",
+              "eligible": "RB,RB-WR-TE",
+              "oprk": 13,
+              "fullname": "Chris Rodriguez Jr.",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "return": "Limited Practice on Thursday. Questionable for Week 10 at Tennessee",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2964667",
+              "jersey": "24",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "46",
+                    "selection_ids": null,
+                    "under_odds": "-108"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "-10.5"
+                      },
+                      "team_abbr": "JAC"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "+10.5"
+                      },
+                      "team_abbr": "TEN"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Chris Rodriguez Jr. RB JAC' href='https://jjhbffl.football.cbssports.com/players/playerpage/2964667'>Chris Rodriguez Jr.</a> <span class=\"playerPositionAndTeam\">RB &#149; JAC</span> <span class=\"playerIconsWrapper\"><span title=\"Jaguars' Chris Rodriguez: Limited at practice Thursday\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2964667\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Update: Jaguars' Chris Rodriguez: Limited at practice Thursday\"><span class=\"icon-news-note-recent\"></span></a></span><span title=\"Hand: Limited Practice on Thursday. Questionable for Week 10 at Tennessee\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2964667\" subtab=\"Injury Report\" class=\"playerLink\" aria-label=\"Injury Report: Hand: Limited Practice on Thursday. Questionable for Week 10 at Tennessee\"><span class=\"icon-red_cross\"></span></a></span></span>",
+              "percentowned": "71%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+850"
+                  }
+                ]
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/5.gif",
+                  "game_id": 50029311,
+                  "point": "10",
+                  "weather": "High level clouds. Cool.",
+                  "weather_icon_code": "5",
+                  "game_abbr": "NFL_20261115_JAC@TEN",
+                  "time": 1794765600,
+                  "weather_icon_name": "cloudy",
+                  "abbrev": "@TEN",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 57&deg;F, Lo: 28&deg;F"
+                }
+              ],
+              "projected_points": "4.2",
+              "eligible_positions_display": "RB",
+              "headline": "Jaguars' Chris Rodriguez: Limited at practice Thursday",
+              "pro_team": "JAC",
+              "opponent_team": "TEN",
+              "opponent": "@TEN",
+              "roster_pos": "RB-WR-TE",
+              "on_waivers_until": null,
+              "icons": {
+                "headline": "Jaguars' Chris Rodriguez: Limited at practice Thursday",
+                "injury": "Hand: Limited Practice on Thursday. Questionable for Week 10 at Tennessee"
+              }
+            },
+            {
+              "percentstarted": "31%",
+              "home_game": 1,
+              "avg_points": "8.44",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2870511.png",
+              "eligible_for_il": 1,
+              "firstname": "Matt",
+              "on_waivers": 0,
+              "bye_week": "13",
+              "elias_id": "GAY306452",
+              "age": 32,
+              "pro_status": "A",
+              "ytd_points": 76,
+              "lastname": "Gay",
+              "position": "K",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2870511",
+              "eligible": "K",
+              "oprk": 6,
+              "fullname": "Matt Gay",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2870511",
+              "jersey": "14",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "40.5",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "-6.5"
+                      },
+                      "team_abbr": "SEA"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "+6.5"
+                      },
+                      "team_abbr": "LV"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794776700,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Matt Gay K LV' href='https://jjhbffl.football.cbssports.com/players/playerpage/2870511'>Matt Gay</a> <span class=\"playerPositionAndTeam\">K &#149; LV</span> <span class=\"playerIconsWrapper\"><span title=\"Cold Player\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2870511\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Status: Cold Player\"><span class=\"icon-news-note-cold\"></span></a></span></span>",
+              "percentowned": "41%",
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/5.gif",
+                  "game_id": 50029313,
+                  "point": "10",
+                  "weather": "High level clouds. Mild.",
+                  "weather_icon_code": "5",
+                  "game_abbr": "NFL_20261115_SEA@LV",
+                  "time": 1794776700,
+                  "weather_icon_name": "dome",
+                  "abbrev": "SEA",
+                  "venuetype": "Retractable Dome",
+                  "home_team": "false",
+                  "temperature": "Hi: 66&deg;F, Lo: 48&deg;F"
+                }
+              ],
+              "projected_points": "6.3",
+              "eligible_positions_display": "K",
+              "headline": "Raiders' Matt Gay: Sits",
+              "pro_team": "LV",
+              "opponent_team": "SEA",
+              "opponent": "SEA",
+              "roster_pos": "K",
+              "on_waivers_until": null,
+              "icons": {
+                "cold": 1
+              }
+            },
+            {
+              "percentstarted": "70%",
+              "home_game": 0,
+              "avg_points": "3.12",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/nfl/logos/250x250/BUF.png",
+              "eligible_for_il": 1,
+              "firstname": "",
+              "on_waivers": 0,
+              "bye_week": "7",
+              "elias_id": "409",
+              "pro_status": null,
+              "ytd_points": 25,
+              "lastname": "Bills",
+              "position": "DST",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "1904",
+              "eligible": "DST",
+              "oprk": 22,
+              "fullname": "Bills",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "A",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/1904",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-108",
+                    "total": "51",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-8"
+                      },
+                      "team_abbr": "BUF"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+8"
+                      },
+                      "team_abbr": "NYJ"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Bills DST BUF' href='https://jjhbffl.football.cbssports.com/players/playerpage/1904'>Bills</a> <span class=\"playerPositionAndTeam\">DST &#149; BUF</span> <span class=\"playerIconsWrapper\"><span title=\"Hot Player\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/1904\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Status: Hot Player\"><span class=\"icon-news-note-hot\"></span></a></span></span>",
+              "percentowned": "82%",
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/4.gif",
+                  "game_id": 50029310,
+                  "point": "10",
+                  "weather": "Partly cloudy. Cool.",
+                  "weather_icon_code": "4",
+                  "game_abbr": "NFL_20261115_BUF@NYJ",
+                  "time": 1794765600,
+                  "weather_icon_name": "partly_cloudy",
+                  "abbrev": "@NYJ",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 50&deg;F, Lo: 39&deg;F"
+                }
+              ],
+              "projected_points": "7.0",
+              "eligible_positions_display": "DST",
+              "headline": "Bills' Terrel Bernard: Picks off Wentz in MNF win",
+              "pro_team": "BUF",
+              "opponent_team": "NYJ",
+              "opponent": "@NYJ",
+              "roster_pos": "DST",
+              "on_waivers_until": null,
+              "icons": {
+                "hot": 1
+              }
+            },
+            {
+              "percentstarted": "56%",
+              "home_game": 0,
+              "avg_points": "9.12",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/3163079.png",
+              "eligible_for_il": 1,
+              "firstname": "C.J.",
+              "on_waivers": 0,
+              "bye_week": "8",
+              "elias_id": "STR702090",
+              "age": 25,
+              "pro_status": "A",
+              "ytd_points": 73,
+              "lastname": "Stroud",
+              "position": "QB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "3163079",
+              "eligible": "QB",
+              "oprk": 8,
+              "fullname": "C.J. Stroud",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/3163079",
+              "jersey": "7",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-105",
+                    "total": "40.5",
+                    "selection_ids": null,
+                    "under_odds": "-114"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "-4.5"
+                      },
+                      "team_abbr": "HOU"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "+4.5"
+                      },
+                      "team_abbr": "CLE"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' C.J. Stroud QB HOU' href='https://jjhbffl.football.cbssports.com/players/playerpage/3163079'>C.J. Stroud</a> <span class=\"playerPositionAndTeam\">QB &#149; HOU</span> <span class=\"playerIconsWrapper\"><span title=\"Hot Player\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/3163079\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Status: Hot Player\"><span class=\"icon-news-note-hot\"></span></a></span></span>",
+              "percentowned": "97%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+2000"
+                  }
+                ],
+                "stats_categories": {
+                  "PaInt": {
+                    "name": "Interceptions",
+                    "short_name": "Passing Interceptions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-125"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-105"
+                    },
+                    "line": 0.5
+                  },
+                  "PaAtt": {
+                    "name": "Pass Attempts",
+                    "short_name": "Pass Attempts",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-105"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-125"
+                    },
+                    "line": 34.5
+                  },
+                  "PaYd": {
+                    "name": "Passing Yards",
+                    "short_name": "Passing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-115"
+                    },
+                    "line": 242.5
+                  },
+                  "RuYd": {
+                    "name": "Rushing Yards",
+                    "short_name": "Rushing Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-118"
+                    },
+                    "line": 8.5
+                  },
+                  "PaTD": {
+                    "name": "Pass TDs",
+                    "short_name": "Passing Touchdowns",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-118"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "line": 1.5
+                  },
+                  "PaCmp": {
+                    "name": "Pass Completions",
+                    "short_name": "Pass Completions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "+100"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-133"
+                    },
+                    "line": 21.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/18.gif",
+                  "game_id": 50029306,
+                  "point": "10",
+                  "weather": "Sprinkles. Overcast. Cool.",
+                  "weather_icon_code": "18",
+                  "game_abbr": "NFL_20261115_HOU@CLE",
+                  "time": 1794765600,
+                  "weather_icon_name": "rain",
+                  "abbrev": "@CLE",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 47&deg;F, Lo: 43&deg;F"
+                }
+              ],
+              "projected_points": "6.1",
+              "eligible_positions_display": "QB",
+              "headline": "Texans' C.J. Stroud: QBs to Start",
+              "pro_team": "HOU",
+              "opponent_team": "CLE",
+              "opponent": "@CLE",
+              "roster_pos": "QB",
+              "on_waivers_until": null,
+              "icons": {
+                "hot": 1
+              }
+            },
+            {
+              "percentstarted": "50%",
+              "home_game": 0,
+              "avg_points": "2.25",
+              "no_longer_eligible_for_ml": 0,
+              "injury": "Ankle",
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/2982991.png",
+              "eligible_for_il": 1,
+              "firstname": "Dalton",
+              "on_waivers": 0,
+              "bye_week": "7",
+              "elias_id": "KIN069130",
+              "age": 27,
+              "pro_status": "A",
+              "ytd_points": 18,
+              "lastname": "Kincaid",
+              "position": "TE",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "2982991",
+              "eligible": "WR-TE,RB-WR-TE",
+              "oprk": 18,
+              "fullname": "Dalton Kincaid",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "return": "Limited Practice on Thursday. Questionable for Week 10 at N.Y. Jets",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/2982991",
+              "jersey": "86",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-108",
+                    "total": "51",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-8"
+                      },
+                      "team_abbr": "BUF"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+8"
+                      },
+                      "team_abbr": "NYJ"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Dalton Kincaid TE BUF' href='https://jjhbffl.football.cbssports.com/players/playerpage/2982991'>Dalton Kincaid</a> <span class=\"playerPositionAndTeam\">TE &#149; BUF</span> <span class=\"playerIconsWrapper\"><span title=\"Bills' Dalton Kincaid: Remains limited Thursday\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2982991\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Update: Bills' Dalton Kincaid: Remains limited Thursday\"><span class=\"icon-news-note-recent\"></span></a></span><span title=\"Ankle: Limited Practice on Thursday. Questionable for Week 10 at N.Y. Jets\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/2982991\" subtab=\"Injury Report\" class=\"playerLink\" aria-label=\"Injury Report: Ankle: Limited Practice on Thursday. Questionable for Week 10 at N.Y. Jets\"><span class=\"icon-red_cross\"></span></a></span></span>",
+              "percentowned": "88%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+1050"
+                  }
+                ],
+                "stats_categories": {
+                  "ReYd": {
+                    "name": "Receiving Yards",
+                    "short_name": "Receiving Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-120"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "line": 39.5
+                  },
+                  "Recpt": {
+                    "name": "Receptions",
+                    "short_name": "Receptions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-105"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-125"
+                    },
+                    "line": 3.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/4.gif",
+                  "game_id": 50029310,
+                  "point": "10",
+                  "weather": "Partly cloudy. Cool.",
+                  "weather_icon_code": "4",
+                  "game_abbr": "NFL_20261115_BUF@NYJ",
+                  "time": 1794765600,
+                  "weather_icon_name": "partly_cloudy",
+                  "abbrev": "@NYJ",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 50&deg;F, Lo: 39&deg;F"
+                }
+              ],
+              "projected_points": "2.3",
+              "eligible_positions_display": "TE",
+              "headline": "Bills' Dalton Kincaid: Remains limited Thursday",
+              "pro_team": "BUF",
+              "opponent_team": "NYJ",
+              "opponent": "@NYJ",
+              "roster_pos": "WR-TE",
+              "on_waivers_until": null,
+              "icons": {
+                "headline": "Bills' Dalton Kincaid: Remains limited Thursday",
+                "injury": "Ankle: Limited Practice on Thursday. Questionable for Week 10 at N.Y. Jets"
+              }
+            },
+            {
+              "percentstarted": "4%",
+              "home_game": 0,
+              "avg_points": "2.50",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/3163963.png",
+              "eligible_for_il": 1,
+              "firstname": "Darnell",
+              "on_waivers": 0,
+              "bye_week": "9",
+              "elias_id": "WAS185860",
+              "age": 25,
+              "pro_status": "A",
+              "ytd_points": 20,
+              "lastname": "Washington",
+              "position": "TE",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "3163963",
+              "eligible": "WR-TE,RB-WR-TE",
+              "oprk": 12,
+              "fullname": "Darnell Washington",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/3163963",
+              "jersey": "80",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-108",
+                    "total": "49.5",
+                    "selection_ids": null,
+                    "under_odds": "-111"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-111",
+                        "spread": "+3.5"
+                      },
+                      "team_abbr": "PIT"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-108",
+                        "spread": "-3.5"
+                      },
+                      "team_abbr": "CIN"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794792000,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Darnell Washington TE PIT' href='https://jjhbffl.football.cbssports.com/players/playerpage/3163963'>Darnell Washington</a> <span class=\"playerPositionAndTeam\">TE &#149; PIT</span> ",
+              "percentowned": "8%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+1550"
+                  }
+                ],
+                "stats_categories": {
+                  "ReYd": {
+                    "name": "Receiving Yards",
+                    "short_name": "Receiving Yards",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-120"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "line": 25.5
+                  },
+                  "Recpt": {
+                    "name": "Receptions",
+                    "short_name": "Receptions",
+                    "over": {
+                      "selection_id": "-",
+                      "odds": "-111"
+                    },
+                    "under": {
+                      "selection_id": "-",
+                      "odds": "-118"
+                    },
+                    "line": 2.5
+                  }
+                }
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/7.gif",
+                  "game_id": 50029315,
+                  "point": "10",
+                  "weather": "Overcast. Cool.",
+                  "weather_icon_code": "7",
+                  "game_abbr": "NFL_20261115_PIT@CIN",
+                  "time": 1794792000,
+                  "weather_icon_name": "cloudy",
+                  "abbrev": "@CIN",
+                  "venuetype": "Outside",
+                  "home_team": "true",
+                  "temperature": "Hi: 48&deg;F, Lo: 33&deg;F"
+                }
+              ],
+              "projected_points": "2.4",
+              "eligible_positions_display": "TE",
+              "headline": "Steelers' Darnell Washington: Week 10 Waiver Priority List",
+              "pro_team": "PIT",
+              "opponent_team": "CIN",
+              "opponent": "@CIN",
+              "roster_pos": "WR-TE",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "3%",
+              "home_game": 1,
+              "avg_points": "2.12",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/3162514.png",
+              "eligible_for_il": 1,
+              "firstname": "MarShawn",
+              "on_waivers": 0,
+              "bye_week": "11",
+              "elias_id": "LLO673464",
+              "age": 25,
+              "pro_status": "A",
+              "ytd_points": 17,
+              "lastname": "Lloyd",
+              "position": "RB",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "3162514",
+              "eligible": "RB,RB-WR-TE",
+              "oprk": 7,
+              "fullname": "MarShawn Lloyd",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/3162514",
+              "jersey": "32",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "42",
+                    "selection_ids": null,
+                    "under_odds": "-108"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+3"
+                      },
+                      "team_abbr": "MIN"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-3"
+                      },
+                      "team_abbr": "GB"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' MarShawn Lloyd RB GB' href='https://jjhbffl.football.cbssports.com/players/playerpage/3162514'>MarShawn Lloyd</a> <span class=\"playerPositionAndTeam\">RB &#149; GB</span> ",
+              "percentowned": "31%",
+              "player_props": {
+                "misc": [
+                  {
+                    "name": "First TD Scorer",
+                    "selection_id": "sr:outcome:10000",
+                    "odds": "+1600"
+                  }
+                ]
+              },
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/1.gif",
+                  "game_id": 50029307,
+                  "point": "10",
+                  "weather": "Sunny. Cool.",
+                  "weather_icon_code": "1",
+                  "game_abbr": "NFL_20261115_MIN@GB",
+                  "time": 1794765600,
+                  "weather_icon_name": "sunny",
+                  "abbrev": "MIN",
+                  "venuetype": "Outside",
+                  "home_team": "false",
+                  "temperature": "Hi: 48&deg;F, Lo: 24&deg;F"
+                }
+              ],
+              "projected_points": "1.1",
+              "eligible_positions_display": "RB",
+              "headline": "Packers' MarShawn Lloyd: Good to go for Week 10",
+              "pro_team": "GB",
+              "opponent_team": "MIN",
+              "opponent": "MIN",
+              "roster_pos": "RB-WR-TE",
+              "on_waivers_until": null
+            },
+            {
+              "percentstarted": "8%",
+              "home_game": 1,
+              "avg_points": "6.00",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/football/nfl/players/170x170/28899321.png",
+              "eligible_for_il": 1,
+              "firstname": "Trey",
+              "on_waivers": 0,
+              "bye_week": "11",
+              "elias_id": "SMA037753",
+              "age": 23,
+              "pro_status": "A",
+              "ytd_points": 54,
+              "lastname": "Smack",
+              "position": "K",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "28899321",
+              "eligible": "K",
+              "oprk": 7,
+              "fullname": "Trey Smack",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/28899321",
+              "jersey": "28",
+              "game_odds": {
+                "odds_from_preferred_book": 1,
+                "odds": {
+                  "total": {
+                    "over_odds": "-111",
+                    "total": "42",
+                    "selection_ids": null,
+                    "under_odds": "-108"
+                  },
+                  "team_odds": [
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-114",
+                        "spread": "+3"
+                      },
+                      "team_abbr": "MIN"
+                    },
+                    {
+                      "spread": {
+                        "selection_id": "-",
+                        "odds": "-105",
+                        "spread": "-3"
+                      },
+                      "team_abbr": "GB"
+                    }
+                  ]
+                },
+                "book_used": "MGM",
+                "game_status": "S"
+              },
+              "gametime": 1794765600,
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Trey Smack K GB' href='https://jjhbffl.football.cbssports.com/players/playerpage/28899321'>Trey Smack</a> <span class=\"playerPositionAndTeam\">K &#149; GB</span> <span class=\"playerIconsWrapper\"><span title=\"Packers' Trey Smack: Logs full practice Thursday\"><a href=\"https://jjhbffl.football.cbssports.com/players/playerpage/28899321\" class=\"playerLink\" subtab=\"Update\" aria-label=\"Update: Packers' Trey Smack: Logs full practice Thursday\"><span class=\"icon-news-note-recent\"></span></a></span></span>",
+              "percentowned": "14%",
+              "opponents": [
+                {
+                  "weather_icon_url": "http://sports.cbsimg.net/images/weather/icons15x20/1.gif",
+                  "game_id": 50029307,
+                  "point": "10",
+                  "weather": "Sunny. Cool.",
+                  "weather_icon_code": "1",
+                  "game_abbr": "NFL_20261115_MIN@GB",
+                  "time": 1794765600,
+                  "weather_icon_name": "sunny",
+                  "abbrev": "MIN",
+                  "venuetype": "Outside",
+                  "home_team": "false",
+                  "temperature": "Hi: 48&deg;F, Lo: 24&deg;F"
+                }
+              ],
+              "projected_points": "6.2",
+              "eligible_positions_display": "K",
+              "headline": "Packers' Trey Smack: Logs full practice Thursday",
+              "pro_team": "GB",
+              "opponent_team": "MIN",
+              "opponent": "MIN",
+              "roster_pos": "K",
+              "on_waivers_until": null,
+              "icons": {
+                "headline": "Packers' Trey Smack: Logs full practice Thursday"
+              }
+            },
+            {
+              "percentstarted": "3%",
+              "avg_points": "7.33",
+              "no_longer_eligible_for_ml": 0,
+              "update_type": "normal",
+              "photo": "http://sports.cbsimg.net/images/nfl/logos/250x250/TB.png",
+              "eligible_for_il": 1,
+              "firstname": "",
+              "on_waivers": 0,
+              "bye_week": "10",
+              "elias_id": "417",
+              "pro_status": null,
+              "ytd_points": 66,
+              "lastname": "Buccaneers",
+              "position": "DST",
+              "no_longer_eligible_for_il": 0,
+              "owned_by_team_id": "15",
+              "id": "1927",
+              "eligible": "DST",
+              "fullname": "Buccaneers",
+              "eligible_for_offense_and_defense": 0,
+              "roster_status": "RS",
+              "is_keeper": 0,
+              "profile_url": "https://jjhbffl.football.cbssports.com/players/playerpage/1927",
+              "is_locked": "0",
+              "profile_link": "<a class='playerLink' aria-label=' Buccaneers DST TB' href='https://jjhbffl.football.cbssports.com/players/playerpage/1927'>Buccaneers</a> <span class=\"playerPositionAndTeam\">DST &#149; TB</span> ",
+              "percentowned": "32%",
+              "opponents": [
+                {
+                  "game_id": null,
+                  "abbrev": "BYE",
+                  "venuetype": "Outside",
+                  "point": "10",
+                  "game_abbr": null,
+                  "time": null
+                }
+              ],
+              "projected_points": "0.0",
+              "eligible_positions_display": "DST",
+              "headline": "Buccaneers' Tykee Smith: Picks off pass in Week 9 defeat",
+              "pro_team": "TB",
+              "opponent": null,
+              "roster_pos": "DST",
+              "on_waivers_until": null
+            }
+          ],
+          "lineup_status": "ok",
+          "logo": "http://sports.cbsimg.net/images/fantasy/teams/f.png?width=100&height=100",
+          "projected_points": 50.1,
+          "name": "Foot Long Dong",
+          "abbr": "FLD"
+        }
+      ],
+      "show_lineup_optimizer": 1
+    }
+  }
+}

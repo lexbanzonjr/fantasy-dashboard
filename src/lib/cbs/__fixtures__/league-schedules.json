@@ -1,0 +1,146 @@
+{
+  "statusMessage": "OK",
+  "statusCode": 200,
+  "uri": "/league/schedules",
+  "uriAlias": "/league/schedules",
+  "body": {
+    "schedule": {
+      "periods": [
+        {
+          "start": "11/10/26",
+          "id": "10",
+          "type": "Regular Season",
+          "end": "11/16/26",
+          "label": "Week 10",
+          "matchups": [
+            {
+              "id": "1",
+              "away_team": {
+                "long_abbr": "Nee",
+                "division": "",
+                "short_name": "The Kn",
+                "id": "21",
+                "is_vacant": 0,
+                "record": "8-1-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/21-129399.jpg?width=100&height=100",
+                "name": "The Knights That Say Nee",
+                "abbr": "TKT"
+              },
+              "home_team": {
+                "long_abbr": "Misfits",
+                "division": "",
+                "short_name": "Little",
+                "id": "25",
+                "is_vacant": 0,
+                "record": "6-3-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/25-1760512329.jpg?width=100&height=100",
+                "name": "Little Misfits",
+                "abbr": "ITT"
+              }
+            },
+            {
+              "id": "2",
+              "away_team": {
+                "long_abbr": "Mudshark",
+                "division": "",
+                "short_name": "Mudsha",
+                "id": "1",
+                "is_vacant": 0,
+                "record": "6-3-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/1-12144.gif?width=100&height=100",
+                "name": "Mudsharks",
+                "abbr": "Mud"
+              },
+              "home_team": {
+                "long_abbr": "Devils",
+                "division": "",
+                "short_name": "Sun De",
+                "id": "17",
+                "is_vacant": 0,
+                "record": "4-5-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/17-29671.jpg?width=100&height=100",
+                "name": "Sun Devils",
+                "abbr": "SD"
+              }
+            },
+            {
+              "id": "3",
+              "away_team": {
+                "long_abbr": "MOD",
+                "division": "",
+                "short_name": "Minist",
+                "id": "23",
+                "is_vacant": 0,
+                "record": "4-5-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/23-1633389839.jpg?width=100&height=100",
+                "name": "Minister of Defense",
+                "abbr": "MOD"
+              },
+              "home_team": {
+                "long_abbr": "Samps",
+                "division": "",
+                "short_name": "The Sa",
+                "id": "22",
+                "is_vacant": 0,
+                "record": "3-6-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/22-1131251.gif?width=100&height=100",
+                "name": "The Sampsonites ",
+                "abbr": "SMY"
+              }
+            },
+            {
+              "id": "4",
+              "away_team": {
+                "long_abbr": "Crush",
+                "division": "",
+                "short_name": "Orange",
+                "id": "19",
+                "is_vacant": 0,
+                "record": "4-5-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/19-1725514035.jpg?width=100&height=100",
+                "name": "Orange Crush Crusade",
+                "abbr": "Crush"
+              },
+              "home_team": {
+                "long_abbr": "SNB",
+                "division": "",
+                "short_name": "Silver",
+                "id": "16",
+                "is_vacant": 0,
+                "record": "4-5-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/16-11715.jpg?width=100&height=100",
+                "name": "Silver N Black",
+                "abbr": "SNB"
+              }
+            },
+            {
+              "id": "5",
+              "away_team": {
+                "long_abbr": "CSharpe",
+                "division": "",
+                "short_name": "Sharpe",
+                "id": "10",
+                "is_vacant": 0,
+                "record": "2-7-0",
+                "logo": "https://fantasy-media.cbssports.com/football/jjhbffl/team_logo/10-3459.jpg?width=100&height=100",
+                "name": "Sharpe Cheddah",
+                "abbr": "SC"
+              },
+              "home_team": {
+                "long_abbr": "FLD",
+                "division": "",
+                "short_name": "Foot L",
+                "id": "15",
+                "is_vacant": 0,
+                "record": "4-5-0",
+                "logo": "http://sports.cbsimg.net/images/fantasy/teams/f.png?width=100&height=100",
+                "name": "Foot Long Dong",
+                "abbr": "FLD"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
