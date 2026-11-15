@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default async function TeamPage({ params }: PageProps<"/teams/[teamId]">) {
   await requireSignIn();
   const { teamId } = await params;
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   if (cbs.status !== "connected") return null;
 
   let data;

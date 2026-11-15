@@ -1,5 +1,5 @@
 import "server-only";
-import { db, now } from "@/lib/db";
+import { db, now, one } from "@/lib/db";
 import { env } from "@/lib/env";
 import { decryptToken, encryptToken } from "./crypto";
 
@@ -23,8 +23,8 @@ interface Row {
   last_verified_at: string | null;
 }
 
-export function readConnection(): Connection | null {
-  const row = db().query("SELECT * FROM cbs_connection WHERE id = 1").get() as Row | undefined;
+export async function readConnection(): Promise<Connection | null> {
+  const row = await one<Row>("SELECT * FROM cbs_connection WHERE id = 1");
   if (!row) return null;
   return {
     leagueId: row.league_id,
@@ -45,24 +45,24 @@ export function connectionToken(c: Connection): string | null {
   }
 }
 
-export function saveConnection(input: { leagueId: string; leagueName: string; myTeamId: string | null; token: string }) {
+export async function saveConnection(input: { leagueId: string; leagueName: string; myTeamId: string | null; token: string }) {
   const t = now();
-  db()
-    .query(
-      `INSERT INTO cbs_connection (id, league_id, league_name, my_team_id, token_ciphertext, token_updated_at, last_verified_at, created_at, updated_at)
+  await (await db()).execute({
+    sql:
+            `INSERT INTO cbs_connection (id, league_id, league_name, my_team_id, token_ciphertext, token_updated_at, last_verified_at, created_at, updated_at)
        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT (id) DO UPDATE SET
          league_id = excluded.league_id, league_name = excluded.league_name, my_team_id = excluded.my_team_id,
          token_ciphertext = excluded.token_ciphertext, token_updated_at = excluded.token_updated_at,
          last_verified_at = excluded.last_verified_at, updated_at = excluded.updated_at`,
-    )
-    .run(input.leagueId, input.leagueName, input.myTeamId, encryptToken(input.token, env().cbsTokenKey), t, t, t, t);
+    args: [input.leagueId, input.leagueName, input.myTeamId, encryptToken(input.token, env().cbsTokenKey), t, t, t, t],
+  });
 }
 
-export function setMyTeam(teamId: string) {
-  db().query("UPDATE cbs_connection SET my_team_id = ?, updated_at = ? WHERE id = 1").run(teamId, now());
+export async function setMyTeam(teamId: string) {
+  await (await db()).execute({ sql: "UPDATE cbs_connection SET my_team_id = ?, updated_at = ? WHERE id = 1", args: [teamId, now()] });
 }
 
-export function deleteConnection() {
-  db().query("DELETE FROM cbs_connection WHERE id = 1").run();
+export async function deleteConnection() {
+  await (await db()).execute("DELETE FROM cbs_connection WHERE id = 1");
 }

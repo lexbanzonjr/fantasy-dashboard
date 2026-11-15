@@ -39,7 +39,7 @@ export async function saveCbsConnection(_prev: ConnectState, form: FormData): Pr
 
   const mine = myTeamId(teams);
   try {
-    saveConnection({ leagueId, leagueName: league.name, myTeamId: mine, token });
+    await saveConnection({ leagueId, leagueName: league.name, myTeamId: mine, token });
   } catch (err) {
     return { status: "error", message: (err as Error).message };
   }
@@ -58,12 +58,12 @@ export async function saveCbsConnection(_prev: ConnectState, form: FormData): Pr
 export async function chooseMyTeam(form: FormData) {
   await requireSignIn();
   const teamId = String(form.get("teamId") ?? "").trim();
-  if (teamId) setMyTeam(teamId);
+  if (teamId) await setMyTeam(teamId);
   revalidatePath("/", "layout");
 }
 
 export async function disconnectCbs() {
   await requireSignIn();
-  deleteConnection();
+  await deleteConnection();
   revalidatePath("/", "layout");
 }

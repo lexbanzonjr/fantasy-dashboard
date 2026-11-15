@@ -15,7 +15,7 @@ const when = (iso: string | null) => (iso ? new Date(iso).toLocaleString() : "ne
 
 export default async function SettingsPage() {
   await requireSignIn();
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   const connection = cbs.status === "disconnected" ? null : cbs.connection;
 
   return (
