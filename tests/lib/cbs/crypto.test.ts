@@ -3,35 +3,73 @@ import { describe, expect, it } from "vitest";
 import { decryptToken, encryptToken } from "@/lib/cbs/crypto";
 
 const key = crypto.randomBytes(32).toString("base64");
+const token = "U2FsdGVkX1+abc/def==";
 
-describe("token encryption", () => {
-  it("round-trips a token, with a fresh IV each time", () => {
-    const token = "U2FsdGVkX1+abc/def==";
-    const a = encryptToken(token, key);
-    const b = encryptToken(token, key);
-    expect(a).not.toBe(b);
-    expect(a).not.toContain(token);
-    expect(a.split(".")).toHaveLength(3);
-    expect(decryptToken(a, key)).toBe(token);
-    expect(decryptToken(b, key)).toBe(token);
+describe("encryptToken", () => {
+  it("produces an iv.tag.ciphertext string that hides the token", () => {
+    // Act
+    const result = encryptToken(token, key);
+
+    // Assert
+    expect(result).not.toContain(token);
+    expect(result.split(".")).toHaveLength(3);
+  });
+
+  it("uses a fresh IV each time", () => {
+    // Arrange
+    const first = encryptToken(token, key);
+
+    // Act
+    const second = encryptToken(token, key);
+
+    // Assert
+    expect(second).not.toBe(first);
+  });
+
+  it.each([
+    ["is null", null, /isn't set/],
+    ["is empty", "", /isn't set/],
+    ["isn't 32 bytes", crypto.randomBytes(16).toString("base64"), /decodes to 16/],
+  ])("throws when the key %s", (_label, badKey, message) => {
+    // Act & Assert
+    expect(() => encryptToken("x", badKey)).toThrow(message);
+  });
+});
+
+describe("decryptToken", () => {
+  it("round-trips an encrypted token", () => {
+    // Arrange
+    const encrypted = encryptToken(token, key);
+
+    // Act
+    const result = decryptToken(encrypted, key);
+
+    // Assert
+    expect(result).toBe(token);
   });
 
   it("rejects tampered ciphertext", () => {
+    // Arrange
     const [iv, tag, ct] = encryptToken("secret", key).split(".") as [string, string, string];
     const flipped = Buffer.from(ct, "base64url");
     flipped[0]! ^= 1;
-    expect(() => decryptToken([iv, tag, flipped.toString("base64url")].join("."), key)).toThrow();
+    const tampered = [iv, tag, flipped.toString("base64url")].join(".");
+
+    // Act & Assert
+    expect(() => decryptToken(tampered, key)).toThrow();
+  });
+
+  it("rejects a malformed value", () => {
+    // Act & Assert
     expect(() => decryptToken("not-three-parts", key)).toThrow(/Malformed/);
   });
 
   it("rejects a different key", () => {
+    // Arrange
+    const encrypted = encryptToken("secret", key);
     const other = crypto.randomBytes(32).toString("base64");
-    expect(() => decryptToken(encryptToken("secret", key), other)).toThrow();
-  });
 
-  it("requires a 32-byte key", () => {
-    expect(() => encryptToken("x", null)).toThrow(/isn't set/);
-    expect(() => encryptToken("x", "")).toThrow(/isn't set/);
-    expect(() => encryptToken("x", crypto.randomBytes(16).toString("base64"))).toThrow(/decodes to 16/);
+    // Act & Assert
+    expect(() => decryptToken(encrypted, other)).toThrow();
   });
 });

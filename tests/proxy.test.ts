@@ -20,39 +20,93 @@ afterEach(() => {
 
 describe("proxy", () => {
   it("sends signed-out page visits to the login page, remembering where they were going", () => {
-    const res = proxy(request("/teams?sort=name"));
+    // Arrange
+    const req = request("/teams?sort=name");
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toBe("http://localhost:6972/login?next=%2Fteams%3Fsort%3Dname");
-    expect(proxy(request("/")).headers.get("location")).toBe("http://localhost:6972/login");
+  });
+
+  it("sends a signed-out visit to / to the login page without a next param", () => {
+    // Arrange
+    const req = request("/");
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
+    expect(res.headers.get("location")).toBe("http://localhost:6972/login");
   });
 
   it("answers signed-out API calls with 401", async () => {
-    const res = proxy(request("/api/scan"));
+    // Arrange
+    const req = request("/api/scan");
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
     expect(res.status).toBe(401);
     expect(await res.json()).toEqual({ error: "Sign in first" });
   });
 
-  it("lets a valid session through, and not a forged one", () => {
-    const { value } = createSession(creds);
-    expect(proxy(request("/api/scan", value)).headers.get("x-middleware-next")).toBe("1");
-    expect(proxy(request("/teams", value)).headers.get("x-middleware-next")).toBe("1");
-    expect(proxy(request("/api/scan", "9999999999999.forged")).status).toBe(401);
+  it.each([["/api/scan"], ["/teams"]])("lets a valid session through to %s", (path) => {
+    // Arrange
+    const req = request(path, createSession(creds).value);
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
+    expect(res.headers.get("x-middleware-next")).toBe("1");
+  });
+
+  it("rejects a forged session", () => {
+    // Arrange
+    const req = request("/api/scan", "9999999999999.forged");
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
+    expect(res.status).toBe(401);
   });
 
   it("says how to set a login when there isn't one", async () => {
+    // Arrange
     g.__fantasyDashboardEnv = parseEnv({});
-    const res = proxy(request("/api/scan", createSession(creds).value));
+    const req = request("/api/scan", createSession(creds).value);
+
+    // Act
+    const res = proxy(req);
+
+    // Assert
     expect(res.status).toBe(401);
     expect((await res.json()).error).toMatch(/AUTH_USERNAME/);
   });
+});
 
-  it("leaves the login page and Next's own files alone", () => {
-    const [pattern] = config.matcher;
-    const matches = (path: string) => new RegExp(`^${pattern}$`).test(path);
-    expect(matches("/login")).toBe(false);
-    expect(matches("/_next/static/chunks/main.js")).toBe(false);
-    expect(matches("/favicon.ico")).toBe(false);
-    expect(matches("/teams")).toBe(true);
-    expect(matches("/api/scan")).toBe(true);
+describe("proxy config.matcher", () => {
+  const [pattern] = config.matcher;
+
+  it.each([
+    ["/login", false],
+    ["/_next/static/chunks/main.js", false],
+    ["/favicon.ico", false],
+    ["/teams", true],
+    ["/api/scan", true],
+  ])("matches %s: %s", (path, expected) => {
+    // Arrange
+    const matcher = new RegExp(`^${pattern}$`);
+
+    // Act
+    const result = matcher.test(path);
+
+    // Assert
+    expect(result).toBe(expected);
   });
 });

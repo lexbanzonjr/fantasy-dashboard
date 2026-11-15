@@ -3,56 +3,133 @@ import { checkCredentials, createSession, safeNext, SESSION_DAYS, verifySession,
 
 const creds: Credentials = { username: "admin", password: "correct horse", sessionSecret: null };
 const NOW = Date.UTC(2026, 10, 4);
+const DAY = 86_400_000;
 
-describe("sessions", () => {
-  it("verify the cookie they made, for 30 days", () => {
+describe("createSession", () => {
+  it("expires the cookie after SESSION_DAYS", () => {
+    // Act
+    const { expires } = createSession(creds, NOW);
+
+    // Assert
+    expect(expires.getTime()).toBe(NOW + SESSION_DAYS * DAY);
+  });
+});
+
+describe("verifySession", () => {
+  it.each([
+    ["when just made", 0],
+    ["29 days later", 29 * DAY],
+  ])("accepts its own cookie %s", (_label, offset) => {
+    // Arrange
+    const { value } = createSession(creds, NOW);
+
+    // Act
+    const result = verifySession(creds, value, NOW + offset);
+
+    // Assert
+    expect(result).toBe(true);
+  });
+
+  it("rejects a cookie at its expiry time", () => {
+    // Arrange
     const { value, expires } = createSession(creds, NOW);
-    expect(expires.getTime()).toBe(NOW + SESSION_DAYS * 86_400_000);
-    expect(verifySession(creds, value, NOW)).toBe(true);
-    expect(verifySession(creds, value, NOW + 29 * 86_400_000)).toBe(true);
-    expect(verifySession(creds, value, expires.getTime())).toBe(false);
+
+    // Act
+    const result = verifySession(creds, value, expires.getTime());
+
+    // Assert
+    expect(result).toBe(false);
   });
 
-  it("reject tampered, malformed and missing cookies", () => {
-    const { value } = createSession(creds, NOW);
-    const [expires, sig] = value.split(".");
-    expect(verifySession(creds, `${Number(expires) + 1000}.${sig}`, NOW)).toBe(false);
-    expect(verifySession(creds, `${expires}.${sig!.slice(0, -2)}xx`, NOW)).toBe(false);
-    expect(verifySession(creds, `${value}.extra`, NOW)).toBe(false);
-    expect(verifySession(creds, "abc.def", NOW)).toBe(false);
-    expect(verifySession(creds, "", NOW)).toBe(false);
-    expect(verifySession(creds, undefined, NOW)).toBe(false);
+  it.each([
+    ["a pushed-back expiry", (exp: string, sig: string) => `${Number(exp) + 1000}.${sig}`],
+    ["an altered signature", (exp: string, sig: string) => `${exp}.${sig.slice(0, -2)}xx`],
+    ["an extra segment", (exp: string, sig: string) => `${exp}.${sig}.extra`],
+  ])("rejects a cookie with %s", (_label, tamper) => {
+    // Arrange
+    const [exp, sig] = createSession(creds, NOW).value.split(".") as [string, string];
+
+    // Act
+    const result = verifySession(creds, tamper(exp, sig), NOW);
+
+    // Assert
+    expect(result).toBe(false);
   });
 
-  it("stop working when the password or secret changes", () => {
+  it.each([["abc.def"], [""], [undefined]])("rejects the malformed or missing cookie %j", (cookie) => {
+    // Act
+    const result = verifySession(creds, cookie, NOW);
+
+    // Assert
+    expect(result).toBe(false);
+  });
+
+  it.each([
+    ["the password changes", { password: "new" }],
+    ["a session secret is set", { sessionSecret: "s3cret" }],
+  ])("rejects an old cookie once %s", (_label, change) => {
+    // Arrange
     const { value } = createSession(creds, NOW);
-    expect(verifySession({ ...creds, password: "new" }, value, NOW)).toBe(false);
-    expect(verifySession({ ...creds, sessionSecret: "s3cret" }, value, NOW)).toBe(false);
+
+    // Act
+    const result = verifySession({ ...creds, ...change }, value, NOW);
+
+    // Assert
+    expect(result).toBe(false);
+  });
+
+  it("ignores password changes when a session secret signs cookies", () => {
+    // Arrange
     const withSecret = { ...creds, sessionSecret: "s3cret" };
-    const signed = createSession(withSecret, NOW).value;
-    // With a secret set, the password no longer signs cookies.
-    expect(verifySession({ ...withSecret, password: "changed" }, signed, NOW)).toBe(true);
+    const { value } = createSession(withSecret, NOW);
+
+    // Act
+    const result = verifySession({ ...withSecret, password: "changed" }, value, NOW);
+
+    // Assert
+    expect(result).toBe(true);
   });
 });
 
 describe("checkCredentials", () => {
-  it("needs both the username and the password", () => {
-    expect(checkCredentials(creds, "admin", "correct horse")).toBe(true);
-    expect(checkCredentials(creds, "admin", "wrong")).toBe(false);
-    expect(checkCredentials(creds, "Admin", "correct horse")).toBe(false);
-    expect(checkCredentials(creds, "", "")).toBe(false);
+  it("accepts the right username and password", () => {
+    // Act
+    const result = checkCredentials(creds, "admin", "correct horse");
+
+    // Assert
+    expect(result).toBe(true);
+  });
+
+  it.each([
+    ["a wrong password", "admin", "wrong"],
+    ["a differently-cased username", "Admin", "correct horse"],
+    ["empty values", "", ""],
+  ])("rejects %s", (_label, username, password) => {
+    // Act
+    const result = checkCredentials(creds, username, password);
+
+    // Assert
+    expect(result).toBe(false);
   });
 });
 
 describe("safeNext", () => {
-  it("keeps paths on this site", () => {
-    expect(safeNext("/movies?sort=year")).toBe("/movies?sort=year");
-    expect(safeNext("/tv/3/season/1")).toBe("/tv/3/season/1");
+  it.each([["/movies?sort=year"], ["/tv/3/season/1"]])("keeps the on-site path %s", (path) => {
+    // Act
+    const result = safeNext(path);
+
+    // Assert
+    expect(result).toBe(path);
   });
 
-  it("sends everything else home", () => {
-    for (const bad of ["//evil.example", "/\\evil.example", "https://evil.example/", "movies", "", null, undefined, 42]) {
-      expect(safeNext(bad)).toBe("/");
-    }
-  });
+  it.each([["//evil.example"], ["/\\evil.example"], ["https://evil.example/"], ["movies"], [""], [null], [undefined], [42]])(
+    "sends %j home",
+    (bad) => {
+      // Act
+      const result = safeNext(bad);
+
+      // Assert
+      expect(result).toBe("/");
+    },
+  );
 });
