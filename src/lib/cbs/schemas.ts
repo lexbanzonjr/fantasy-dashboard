@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// Raw CBS API responses (version=3.0), from the fixtures in __fixtures__. Only the fields the app uses;
+// Raw CBS API responses (version=3.0), from the fixtures in tests/fixtures/cbs. Only the fields the app uses;
 // the rest are dropped. CBS mixes numbers and numeric strings, so both are accepted.
 
 const id = z.union([z.string(), z.number()]).transform(String);

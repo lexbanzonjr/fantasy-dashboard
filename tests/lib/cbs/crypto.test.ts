@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { describe, expect, it } from "vitest";
-import { decryptToken, encryptToken } from "./crypto";
+import { decryptToken, encryptToken } from "@/lib/cbs/crypto";
 
 const key = crypto.randomBytes(32).toString("base64");
 

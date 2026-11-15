@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   resolve: {
     alias: {
-      "server-only": fileURLToPath(new URL("./src/test/empty.ts", import.meta.url)),
+      "server-only": fileURLToPath(new URL("./tests/support/empty.ts", import.meta.url)),
     },
   },
   test: {
     environment: "node",
-    include: ["src/**/*.test.ts"],
+    include: ["tests/**/*.test.ts"],
   },
 });

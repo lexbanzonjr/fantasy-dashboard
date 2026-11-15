@@ -55,7 +55,7 @@ npm run lint
 
 ### CBS API fixtures
 
-The CBS fantasy API has no public docs. `scripts/cbs-probe.mts` calls each endpoint the app uses and saves the responses, with personal details scrubbed, to `src/lib/cbs/__fixtures__/`. The schemas and tests are built from those responses. To refresh them, set `CBS_LEAGUE_ID` and `CBS_TOKEN` in `.env.local` and run:
+The CBS fantasy API has no public docs. `scripts/cbs-probe.mts` calls each endpoint the app uses and saves the responses, with personal details scrubbed, to `tests/fixtures/cbs/`. The schemas and tests are built from those responses. To refresh them, set `CBS_LEAGUE_ID` and `CBS_TOKEN` in `.env.local` and run:
 
 ```sh
 node --env-file=.env.local scripts/cbs-probe.mts

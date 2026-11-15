@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { cbsFetch, CbsAuthError, CbsError, cbsUrl } from "./client";
+import { cbsFetch, CbsAuthError, CbsError, cbsUrl } from "@/lib/cbs/client";
 
 const auth = { token: "tok+en/=", leagueId: "myleague" };
 const schema = z.object({ body: z.object({ ok: z.boolean() }) });

@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { NextRequest } from "next/server";
 import { parseEnv, type Env } from "@/lib/env";
 import { createSession } from "@/lib/auth/session";
-import { config, proxy } from "./proxy";
+import { config, proxy } from "@/proxy";
 
 const g = globalThis as unknown as { __fantasyDashboardEnv?: Env };
 const creds = { username: "tester", password: "pw", sessionSecret: null };

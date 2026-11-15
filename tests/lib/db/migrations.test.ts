@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { migrate, openDatabase } from "./index";
-import { MIGRATIONS } from "./migrations";
+import { migrate, openDatabase } from "@/lib/db/index";
+import { MIGRATIONS } from "@/lib/db/migrations";
 
 const insert = `INSERT INTO cbs_connection (id, league_id, token_ciphertext, created_at, updated_at) VALUES (?, 'lg', 'ct', 'now', 'now')`;
 

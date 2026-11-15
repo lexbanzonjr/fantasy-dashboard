@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bookmarkletSource, extractToken, parseConnectHash } from "./bookmarklet";
+import { bookmarkletSource, extractToken, parseConnectHash } from "@/lib/cbs/bookmarklet";
 
 describe("parseConnectHash", () => {
   it("reads the token and league", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkCredentials, createSession, safeNext, SESSION_DAYS, verifySession, type Credentials } from "./session";
+import { checkCredentials, createSession, safeNext, SESSION_DAYS, verifySession, type Credentials } from "@/lib/auth/session";
 
 const creds: Credentials = { username: "admin", password: "correct horse", sessionSecret: null };
 const NOW = Date.UTC(2026, 10, 4);
