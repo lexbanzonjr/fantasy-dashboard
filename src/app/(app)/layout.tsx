@@ -14,7 +14,7 @@ const NAV = [
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   await requireSignIn();
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   return (
     <>
       <header className="border-b">

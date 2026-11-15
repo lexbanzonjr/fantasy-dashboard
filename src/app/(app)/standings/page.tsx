@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Standings · Fantasy Dashboard" };
 
 export default async function StandingsPage() {
   await requireSignIn();
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   if (cbs.status !== "connected") return null;
 
   let rows;
