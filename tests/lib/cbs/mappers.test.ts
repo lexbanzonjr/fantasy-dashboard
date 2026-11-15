@@ -1,17 +1,17 @@
 import { describe, expect, it } from "vitest";
-import details from "./__fixtures__/league-details.json";
-import rosters from "./__fixtures__/league-rosters.json";
-import live from "./__fixtures__/league-scoring-live.json";
-import standings from "./__fixtures__/league-standings.json";
-import teams from "./__fixtures__/league-teams.json";
-import { myTeamId, toLeague, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
+import details from "../../fixtures/cbs/league-details.json";
+import rosters from "../../fixtures/cbs/league-rosters.json";
+import live from "../../fixtures/cbs/league-scoring-live.json";
+import standings from "../../fixtures/cbs/league-standings.json";
+import teams from "../../fixtures/cbs/league-teams.json";
+import { myTeamId, toLeague, toMatchup, toRoster, toStandings, toTeams } from "@/lib/cbs/mappers";
 import {
   leagueDetailsResponse,
   leagueRostersResponse,
   leagueStandingsResponse,
   leagueTeamsResponse,
   liveScoringResponse,
-} from "./schemas";
+} from "@/lib/cbs/schemas";
 
 describe("toLeague", () => {
   it("maps league details", () => {
