@@ -1,21 +1,27 @@
 import { describe, expect, it } from "vitest";
-import details from "./__fixtures__/league-details.json";
-import rosters from "./__fixtures__/league-rosters.json";
-import live from "./__fixtures__/league-scoring-live.json";
-import standings from "./__fixtures__/league-standings.json";
-import teams from "./__fixtures__/league-teams.json";
-import { myTeamId, toLeague, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
+import details from "../../fixtures/cbs/league-details.json";
+import rosters from "../../fixtures/cbs/league-rosters.json";
+import live from "../../fixtures/cbs/league-scoring-live.json";
+import standings from "../../fixtures/cbs/league-standings.json";
+import teams from "../../fixtures/cbs/league-teams.json";
+import { myTeamId, toLeague, toMatchup, toRoster, toStandings, toTeams } from "@/lib/cbs/mappers";
 import {
   leagueDetailsResponse,
   leagueRostersResponse,
   leagueStandingsResponse,
   leagueTeamsResponse,
   liveScoringResponse,
-} from "./schemas";
+} from "@/lib/cbs/schemas";
 
 describe("toLeague", () => {
   it("maps league details", () => {
-    const league = toLeague("jjhbffl", leagueDetailsResponse.parse(details));
+    // Arrange
+    const parsed = leagueDetailsResponse.parse(details);
+
+    // Act
+    const league = toLeague("jjhbffl", parsed);
+
+    // Assert
     expect(league).toEqual({
       id: "jjhbffl",
       name: "Huntington Beach FFL",
@@ -27,36 +33,69 @@ describe("toLeague", () => {
 });
 
 describe("toTeams", () => {
-  const list = toTeams(leagueTeamsResponse.parse(teams));
+  const parsed = leagueTeamsResponse.parse(teams);
 
   it("maps every team, with owners", () => {
+    // Act
+    const list = toTeams(parsed);
+
+    // Assert
     expect(list).toHaveLength(10);
     expect(list[0]).toMatchObject({ id: "15", name: "Foot Long Dong", abbr: "FLD", isMine: false });
     // Owner names are scrubbed placeholders in the fixtures.
     expect(list[0]!.owners).toEqual([expect.stringMatching(/^name-\d+$/)]);
   });
 
-  it("finds the token owner's team from logged_in_team", () => {
-    expect(myTeamId(list)).toBe("23");
+  it("flags exactly one team as the token owner's", () => {
+    // Act
+    const list = toTeams(parsed);
+
+    // Assert
     expect(list.filter((t) => t.isMine)).toHaveLength(1);
+  });
+});
+
+describe("myTeamId", () => {
+  const list = toTeams(leagueTeamsResponse.parse(teams));
+
+  it("finds the token owner's team from logged_in_team", () => {
+    // Act
+    const result = myTeamId(list);
+
+    // Assert
+    expect(result).toBe("23");
   });
 
   it("returns null when no team is flagged", () => {
-    expect(myTeamId(list.map((t) => ({ ...t, isMine: false })))).toBeNull();
+    // Arrange
+    const unflagged = list.map((t) => ({ ...t, isMine: false }));
+
+    // Act
+    const result = myTeamId(unflagged);
+
+    // Assert
+    expect(result).toBeNull();
   });
 });
 
 describe("toRoster", () => {
   const parsed = leagueRostersResponse.parse(rosters);
-  const roster = toRoster(parsed, "15")!;
 
   it("maps the team and splits starters from the bench", () => {
+    // Act
+    const roster = toRoster(parsed, "15")!;
+
+    // Assert
     expect(roster).toMatchObject({ teamId: "15", teamName: "Foot Long Dong", period: 10 });
     expect(roster.players).toHaveLength(15);
     expect(roster.players.filter((p) => p.isStarter)).toHaveLength(9);
   });
 
   it("maps a player", () => {
+    // Act
+    const roster = toRoster(parsed, "15")!;
+
+    // Assert
     expect(roster.players.find((p) => p.id === "2181054")).toMatchObject({
       name: "Josh Allen",
       position: "QB",
@@ -71,6 +110,10 @@ describe("toRoster", () => {
   });
 
   it("keeps injury details and marks a bye week", () => {
+    // Act
+    const roster = toRoster(parsed, "15")!;
+
+    // Assert
     const waddle = roster.players.find((p) => p.id === "2962110")!;
     expect(waddle.injury).toBe("Concussion: Questionable for Week 11 vs. Las Vegas");
     expect(waddle.byeWeek).toBe(10);
@@ -78,15 +121,27 @@ describe("toRoster", () => {
   });
 
   it("returns null for a team that isn't in a multi-team response", () => {
-    const two = { body: { rosters: { ...parsed.body.rosters, teams: [parsed.body.rosters.teams[0]!, { ...parsed.body.rosters.teams[0]!, id: "99" }] } } };
-    expect(toRoster(two, "42")).toBeNull();
+    // Arrange
+    const first = parsed.body.rosters.teams[0]!;
+    const two = { body: { rosters: { ...parsed.body.rosters, teams: [first, { ...first, id: "99" }] } } };
+
+    // Act
+    const result = toRoster(two, "42");
+
+    // Assert
+    expect(result).toBeNull();
   });
 });
 
 describe("toStandings", () => {
-  const rows = toStandings(leagueStandingsResponse.parse(standings));
-
   it("sorts by rank and maps records", () => {
+    // Arrange
+    const parsed = leagueStandingsResponse.parse(standings);
+
+    // Act
+    const rows = toStandings(parsed);
+
+    // Assert
     expect(rows).toHaveLength(10);
     expect(rows.map((r) => r.rank)).toEqual([...rows.map((r) => r.rank)].sort((a, b) => a - b));
     expect(rows[0]).toMatchObject({
@@ -108,11 +163,18 @@ describe("toMatchup", () => {
   const parsed = liveScoringResponse.parse(live);
 
   it("defaults to the token owner's team", () => {
-    expect(toMatchup(parsed)?.mine.teamId).toBe("23");
+    // Act
+    const result = toMatchup(parsed);
+
+    // Assert
+    expect(result?.mine.teamId).toBe("23");
   });
 
   it("pairs a team with its opponent", () => {
+    // Act
     const m = toMatchup(parsed, "15")!;
+
+    // Assert
     expect(m.period).toBe(10);
     expect(m.status).toBe("in progress");
     expect(m.mine).toMatchObject({ teamId: "15", name: "Foot Long Dong", record: "4-5" });
@@ -120,12 +182,22 @@ describe("toMatchup", () => {
   });
 
   it("has no opponent on a bye", () => {
+    // Arrange
     const teams = parsed.body.live_scoring.teams.map((t) => (t.id === "15" ? { ...t, opp_team_id: null } : t));
     const bye = { body: { live_scoring: { ...parsed.body.live_scoring, teams } } };
-    expect(toMatchup(bye, "15")?.opponent).toBeNull();
+
+    // Act
+    const result = toMatchup(bye, "15");
+
+    // Assert
+    expect(result?.opponent).toBeNull();
   });
 
   it("returns null for an unknown team", () => {
-    expect(toMatchup(parsed, "nope")).toBeNull();
+    // Act
+    const result = toMatchup(parsed, "nope");
+
+    // Assert
+    expect(result).toBeNull();
   });
 });

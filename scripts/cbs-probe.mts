@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const BASE = "https://api.cbssports.com/fantasy";
-const OUT = path.join(import.meta.dirname, "..", "src", "lib", "cbs", "__fixtures__");
+const OUT = path.join(import.meta.dirname, "..", "tests", "fixtures", "cbs");
 
 const leagueId = process.env.CBS_LEAGUE_ID?.trim();
 const token = process.env.CBS_TOKEN?.trim();
