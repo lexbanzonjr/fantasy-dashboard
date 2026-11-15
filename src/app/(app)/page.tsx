@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function DashboardPage() {
   await requireSignIn();
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   // The layout shows the connect banner.
   if (cbs.status !== "connected") return null;
 

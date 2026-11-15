@@ -1,6 +1,6 @@
 # Fantasy Dashboard
 
-A personal dashboard for a CBS fantasy football league: your matchup, your roster, standings, and every team's roster. It runs locally in Docker, stores its data in SQLite, and isn't meant to be deployed publicly.
+A personal dashboard for a CBS fantasy football league: your matchup, your roster, standings, and every team's roster. It runs locally in Docker with a SQLite file, or on Vercel with a Turso database.
 
 ## Setup
 
@@ -34,6 +34,15 @@ CBS has no sign-in for third-party apps, so the dashboard uses the access token 
 3. Click the bookmark. Settings opens with the league and token filled in. Click **Save connection**.
 
 The token travels in the URL fragment, so no server logs it, and it's stored encrypted. When CBS stops accepting it, the app shows **Reconnect CBS**; run the bookmark again.
+
+## Deploy to Vercel
+
+Vercel's disk is temporary, so the deployed app keeps its data in [Turso](https://turso.tech) (hosted SQLite) instead of a local file.
+
+1. Create the database: `turso db create fantasy-dashboard`, then get its URL (`turso db show fantasy-dashboard --url`) and a token (`turso db tokens create fantasy-dashboard`).
+2. Import the GitHub repo into Vercel and set the production branch to `prod`.
+3. In the Vercel project's settings, add these environment variables: `AUTH_USERNAME`, `AUTH_PASSWORD`, `SESSION_SECRET`, `CBS_TOKEN_KEY`, `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, and `NEXT_PUBLIC_SITE_URL` (the Vercel URL).
+4. Push to `prod` to deploy. The tables are created on the first request. Then connect CBS again with the bookmarklet from the deployed site.
 
 ## Development
 

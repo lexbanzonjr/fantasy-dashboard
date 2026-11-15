@@ -1,4 +1,4 @@
-// Schema changes, applied in order and tracked with PRAGMA user_version. Only ever append.
+// Schema changes, applied in order and tracked in the schema_version table. Only ever append.
 export const MIGRATIONS: string[] = [
   // 1: the CBS league connection. One user, so at most one row (id = 1).
   `CREATE TABLE cbs_connection (

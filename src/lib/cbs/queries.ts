@@ -20,8 +20,8 @@ export type CbsContext =
   | { status: "broken"; connection: Connection }
   | { status: "connected"; connection: Connection; auth: CbsAuth };
 
-export const getCbsContext = cache((): CbsContext => {
-  const connection = readConnection();
+export const getCbsContext = cache(async (): Promise<CbsContext> => {
+  const connection = await readConnection();
   if (!connection) return { status: "disconnected" };
   const token = connectionToken(connection);
   if (!token) return { status: "broken", connection };

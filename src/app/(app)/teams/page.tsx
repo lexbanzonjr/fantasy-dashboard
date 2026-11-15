@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Teams · Fantasy Dashboard" };
 
 export default async function TeamsPage() {
   await requireSignIn();
-  const cbs = getCbsContext();
+  const cbs = await getCbsContext();
   if (cbs.status !== "connected") return null;
 
   let teams;
