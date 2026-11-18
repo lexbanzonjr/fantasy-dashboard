@@ -4,8 +4,9 @@ import type {
   LeagueStandingsResponse,
   LeagueTeamsResponse,
   LiveScoringResponse,
+  PlayerRankingsResponse,
 } from "./schemas";
-import type { League, Matchup, MatchupSide, RosterPlayer, StandingRow, Team, TeamRoster } from "./types";
+import type { FreeAgent, League, Matchup, MatchupSide, RosterPlayer, StandingRow, Team, TeamRoster } from "./types";
 
 // Pure functions from parsed CBS responses to the app's types.
 
@@ -99,4 +100,38 @@ export function toMatchup(res: LiveScoringResponse, teamId?: string | null): Mat
   if (!mine) return null;
   const opp = mine.opp_team_id ? live.teams.find((t) => t.id === mine.opp_team_id) : undefined;
   return { period: live.period, status: live.matchup_status, mine: toSide(mine), opponent: opp ? toSide(opp) : null };
+}
+
+// CBS uses a few names for the same slot. Defense and kicker are the ones that vary.
+const POSITION_ALIASES: Record<string, string> = { DEF: "DST", "D/ST": "DST", PK: "K" };
+
+export function normalizePosition(position: string): string {
+  const p = position.trim().toUpperCase();
+  return POSITION_ALIASES[p] ?? p;
+}
+
+// An add/drop has to keep the roster's positions the same.
+export function samePosition(a: string, b: string): boolean {
+  return !!a.trim() && normalizePosition(a) === normalizePosition(b);
+}
+
+// The best-ranked unowned players, best first.
+export function toFreeAgents(res: PlayerRankingsResponse, limit = 10): FreeAgent[] {
+  return res.body.rankings.positions
+    .flatMap((pos) => pos.players)
+    .filter((p) => !p.owned_by_team_id)
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, limit)
+    .map((p) => ({
+      id: p.id,
+      name: p.fullname.trim(),
+      position: p.position,
+      proTeam: p.pro_team,
+      rank: p.rank,
+      byeWeek: p.bye_week ?? null,
+      injury: p.icons?.injury?.trim() || null,
+      onWaivers: p.on_waivers ?? false,
+      opponent: p.opponent,
+      photo: p.photo,
+    }));
 }

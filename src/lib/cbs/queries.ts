@@ -1,14 +1,16 @@
 import "server-only";
 import { cache } from "react";
 import { cbsFetch, type CbsAuth } from "./client";
+import type { PickupPosition } from "./types";
 import { connectionToken, readConnection, type Connection } from "./connection";
-import { toLeague, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
+import { toFreeAgents, toLeague, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
 import {
   leagueDetailsResponse,
   leagueRostersResponse,
   leagueStandingsResponse,
   leagueTeamsResponse,
   liveScoringResponse,
+  playerRankingsResponse,
 } from "./schemas";
 
 // Standings, teams and rosters change slowly; live scoring isn't cached.
@@ -44,4 +46,9 @@ export const getStandings = cache(async (auth: CbsAuth) =>
 
 export const getMatchup = cache(async (auth: CbsAuth, teamId: string | null) =>
   toMatchup(await cbsFetch(liveScoringResponse, "league/scoring/live", auth), teamId),
+);
+
+// The top unowned players at a position, by CBS's ranking.
+export const getFreeAgents = cache(async (auth: CbsAuth, position: PickupPosition, limit = 10) =>
+  toFreeAgents(await cbsFetch(playerRankingsResponse, "players/rankings", auth, { position }, SLOW), limit),
 );

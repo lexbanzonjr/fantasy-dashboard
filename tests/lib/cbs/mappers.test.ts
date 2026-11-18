@@ -2,15 +2,17 @@ import { describe, expect, it } from "vitest";
 import details from "../../fixtures/cbs/league-details.json";
 import rosters from "../../fixtures/cbs/league-rosters.json";
 import live from "../../fixtures/cbs/league-scoring-live.json";
+import rankingsRb from "../../fixtures/cbs/player-rankings-rb.json";
 import standings from "../../fixtures/cbs/league-standings.json";
 import teams from "../../fixtures/cbs/league-teams.json";
-import { myTeamId, toLeague, toMatchup, toRoster, toStandings, toTeams } from "@/lib/cbs/mappers";
+import { myTeamId, normalizePosition, samePosition, toFreeAgents, toLeague, toMatchup, toRoster, toStandings, toTeams } from "@/lib/cbs/mappers";
 import {
   leagueDetailsResponse,
   leagueRostersResponse,
   leagueStandingsResponse,
   leagueTeamsResponse,
   liveScoringResponse,
+  playerRankingsResponse,
 } from "@/lib/cbs/schemas";
 
 describe("toLeague", () => {
@@ -199,5 +201,63 @@ describe("toMatchup", () => {
 
     // Assert
     expect(result).toBeNull();
+  });
+});
+
+describe("toFreeAgents", () => {
+  const parsed = playerRankingsResponse.parse(rankingsRb);
+
+  it("keeps only unowned players", () => {
+    // Act
+    const list = toFreeAgents(parsed, 100);
+
+    // Assert
+    const ownedIds = rankingsRb.body.rankings.positions[0]!.players.filter((p) => p.owned_by_team_id).map((p) => String(p.id));
+    expect(ownedIds.length).toBeGreaterThan(0);
+    expect(list.map((p) => p.id)).not.toEqual(expect.arrayContaining([ownedIds[0]]));
+    expect(list).toHaveLength(12);
+  });
+
+  it("returns the best-ranked first, up to the limit", () => {
+    // Act
+    const list = toFreeAgents(parsed);
+
+    // Assert
+    expect(list).toHaveLength(10);
+    const ranks = list.map((p) => p.rank);
+    expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
+  });
+
+  it("maps injury, waiver status and position", () => {
+    // Act
+    const achane = toFreeAgents(parsed).find((p) => p.name === "De'Von Achane");
+
+    // Assert
+    expect(achane).toMatchObject({ position: "RB", rank: 7, injury: "Knee - ACL: Injured Reserve", onWaivers: true });
+  });
+});
+
+describe("samePosition", () => {
+  it.each([
+    ["RB", "RB", true],
+    ["RB", "WR", false],
+    ["DST", "DEF", true],
+    ["K", "PK", true],
+    ["te", "TE", true],
+    ["", "", false],
+  ])("%s vs %s is %s", (a, b, expected) => {
+    // Act
+    const result = samePosition(a, b);
+
+    // Assert
+    expect(result).toBe(expected);
+  });
+
+  it("normalizes aliases to CBS names", () => {
+    // Act
+    const result = normalizePosition(" d/st ");
+
+    // Assert
+    expect(result).toBe("DST");
   });
 });
