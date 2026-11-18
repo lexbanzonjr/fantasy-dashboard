@@ -74,3 +74,24 @@ export interface Matchup {
   // Null on a bye week.
   opponent: MatchupSide | null;
 }
+
+// The positions you can look for pickups at, as CBS names them.
+export const PICKUP_POSITIONS = ["QB", "RB", "WR", "TE", "K", "DST"] as const;
+export type PickupPosition = (typeof PICKUP_POSITIONS)[number];
+
+// An unowned player, from CBS's rankings at one position.
+export interface FreeAgent {
+  id: string;
+  name: string;
+  position: string;
+  proTeam: string;
+  // CBS's rank at the position (1 = best), across all players, owned or not.
+  rank: number;
+  byeWeek: number | null;
+  injury: string | null;
+  // On waivers means a claim (FAAB bid) rather than an instant add.
+  onWaivers: boolean;
+  // e.g. "TEN", or "Bye: 6".
+  opponent: string | null;
+  photo: string | null;
+}
