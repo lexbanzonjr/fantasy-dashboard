@@ -12,6 +12,9 @@ export interface Env {
   sessionSecret: string | null;
   // 32 random bytes, base64, for encrypting the CBS token. Checked when used.
   cbsTokenKey: string | null;
+  // For pickup research. Null turns the feature off with a message instead of an error.
+  anthropicApiKey: string | null;
+  anthropicModel: string;
 }
 
 const schema = z.object({
@@ -21,6 +24,8 @@ const schema = z.object({
   AUTH_PASSWORD: z.string().optional(),
   SESSION_SECRET: z.string().optional(),
   CBS_TOKEN_KEY: z.string().optional(),
+  ANTHROPIC_API_KEY: z.string().optional(),
+  ANTHROPIC_MODEL: z.string().optional(),
 });
 
 // Validates the environment. Throws one Error listing every problem.
@@ -38,6 +43,8 @@ export function parseEnv(raw: Record<string, string | undefined>, cwd = process.
     authPassword: e.AUTH_PASSWORD || null,
     sessionSecret: e.SESSION_SECRET?.trim() || null,
     cbsTokenKey: e.CBS_TOKEN_KEY?.trim() || null,
+    anthropicApiKey: e.ANTHROPIC_API_KEY?.trim() || null,
+    anthropicModel: e.ANTHROPIC_MODEL?.trim() || "claude-sonnet-5-5",
   };
 }
 
