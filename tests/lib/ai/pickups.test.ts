@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type { AiModel } from "@/lib/ai/model";
-import { buildPickupPrompt, pickupReportSchema, researchPickup, researchPickups, sanitizeReport, type PickupReport } from "@/lib/ai/pickups";
+import { buildPickupPrompt, pickupReportSchema, researchPickup, researchPickups, sanitizeReport, toPickupRows, type PickupReport } from "@/lib/ai/pickups";
 import type { FreeAgent, RosterPlayer } from "@/lib/cbs/types";
 
 const agent: FreeAgent = {
@@ -141,5 +141,43 @@ describe("researchPickups", () => {
 
     // Assert
     expect(peak).toBe(4);
+  });
+});
+
+describe("toPickupRows", () => {
+  it("puts researched players first by score, then the rest by CBS rank", () => {
+    // Arrange
+    const agents = [
+      { ...agent, id: "a", rank: 1 },
+      { ...agent, id: "b", rank: 2 },
+      { ...agent, id: "c", rank: 3 },
+      { ...agent, id: "d", rank: 4 },
+    ];
+    const reports = [
+      { playerId: "d", report: { ...report, score: 90 } },
+      { playerId: "b", report: { ...report, score: 40 } },
+    ];
+
+    // Act
+    const rows = toPickupRows(agents, reports, roster);
+
+    // Assert
+    expect(rows.map((r) => r.agent.id)).toEqual(["d", "b", "a", "c"]);
+  });
+
+  it("looks up the suggested drop on my roster", () => {
+    // Act
+    const [row] = toPickupRows([agent], [{ playerId: agent.id, report }], roster);
+
+    // Assert
+    expect(row!.drop?.id).toBe("rb1");
+  });
+
+  it("has no report or drop for an unresearched player", () => {
+    // Act
+    const [row] = toPickupRows([agent], [], roster);
+
+    // Assert
+    expect(row).toMatchObject({ report: null, drop: null });
   });
 });

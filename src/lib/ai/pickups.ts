@@ -89,3 +89,23 @@ export async function researchPickups(
   await Promise.all(Array.from({ length: Math.min(concurrency, agents.length) }, worker));
   return results;
 }
+
+export interface PickupRow {
+  agent: FreeAgent;
+  report: PickupReport | null;
+  // The suggested drop, looked up on my roster.
+  drop: RosterPlayer | null;
+}
+
+// Pairs each free agent with its cached report. Researched players come first, best score first;
+// the rest keep CBS's rank order.
+export function toPickupRows(agents: FreeAgent[], reports: { playerId: string; report: PickupReport }[], roster: RosterPlayer[]): PickupRow[] {
+  const byId = new Map(reports.map((r) => [r.playerId, r.report]));
+  return agents
+    .map((agent) => {
+      const report = byId.get(agent.id) ?? null;
+      const drop = report?.dropPlayerId ? (roster.find((p) => p.id === report.dropPlayerId) ?? null) : null;
+      return { agent, report, drop };
+    })
+    .sort((a, b) => (b.report?.score ?? -1) - (a.report?.score ?? -1) || a.agent.rank - b.agent.rank);
+}
