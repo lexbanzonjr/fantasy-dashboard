@@ -5,7 +5,7 @@ import { requireSignIn } from "@/lib/auth/server";
 import { getModel } from "@/lib/ai/model";
 import { researchPickups } from "@/lib/ai/pickups";
 import { saveReports } from "@/lib/ai/reports";
-import { getCbsContext, getFreeAgents, getLeague, getRoster } from "@/lib/cbs/queries";
+import { getCbsContext, getFreeAgents, getLeague, getLeagueScoring, getRoster } from "@/lib/cbs/queries";
 import { PICKUP_POSITIONS, type PickupPosition } from "@/lib/cbs/types";
 
 export type ResearchResult = { ok: true; researched: number; failed: string[] } | { ok: false; error: string };
@@ -21,12 +21,22 @@ export async function runResearch(position: string): Promise<ResearchResult> {
   const myTeamId = cbs.connection.myTeamId;
   if (!myTeamId) return { ok: false, error: "Your CBS team isn't known. Reconnect in Settings." };
 
-  const [league, roster, agents] = await Promise.all([
+  const [league, roster, agents, scoring] = await Promise.all([
     getLeague(cbs.auth),
     getRoster(cbs.auth, myTeamId),
     getFreeAgents(cbs.auth, position as PickupPosition),
+    // Research still runs on the PPR flag alone if CBS won't give the scoring rules.
+    getLeagueScoring(cbs.auth).catch((err) => {
+      console.error("Couldn't load league scoring rules", err);
+      return undefined;
+    }),
   ]);
-  const results = await researchPickups(ai, agents, { roster: roster?.players ?? [], isPpr: league.isPpr, week: league.currentPeriod });
+  const results = await researchPickups(ai, agents, {
+    roster: roster?.players ?? [],
+    isPpr: league.isPpr,
+    week: league.currentPeriod,
+    scoring,
+  });
   const done = results.flatMap((r) => ("report" in r ? [r] : []));
   const failed = results.flatMap((r) => ("error" in r ? [agents.find((a) => a.id === r.playerId)?.name ?? r.playerId] : []));
   if (done.length) await saveReports(position, league.currentPeriod, done);
