@@ -36,6 +36,18 @@ describe("openDatabase", () => {
   });
 });
 
+describe("pickup_reports", () => {
+  it("allows one report per position, week and player", async () => {
+    // Arrange
+    const db = await openDatabase(":memory:");
+    const row = "INSERT INTO pickup_reports VALUES ('RB', 11, 'p1', '{}', 'now')";
+    await db.execute(row);
+
+    // Act & Assert
+    await expect(db.execute(row)).rejects.toThrow(/UNIQUE|PRIMARY/);
+  });
+});
+
 describe("cbs_connection", () => {
   it("rejects any id other than 1", async () => {
     // Arrange

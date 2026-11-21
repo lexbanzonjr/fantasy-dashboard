@@ -112,8 +112,41 @@ export const liveScoringResponse = envelope(
   }),
 );
 
+// players/rankings?position=X: CBS's ranking at one position, owned and unowned. Owned players carry owned_by_team_id.
+export const playerRankingsResponse = envelope(
+  z.object({
+    rankings: z.object({
+      positions: z
+        .array(
+          z.object({
+            players: z
+              .array(
+                z.object({
+                  id,
+                  fullname: z.string(),
+                  position: z.string().default(""),
+                  pro_team: z.string().default(""),
+                  rank: num,
+                  bye_week: num.nullish(),
+                  owned_by_team_id: id.nullish(),
+                  on_waivers: flag.optional(),
+                  pro_status: z.string().default(""),
+                  icons: z.object({ injury: z.string().optional() }).nullish(),
+                  opponent: optionalText,
+                  photo: optionalText,
+                }),
+              )
+              .default([]),
+          }),
+        )
+        .default([]),
+    }),
+  }),
+);
+
 export type LeagueDetailsResponse = z.infer<typeof leagueDetailsResponse>;
 export type LeagueTeamsResponse = z.infer<typeof leagueTeamsResponse>;
 export type LeagueRostersResponse = z.infer<typeof leagueRostersResponse>;
 export type LeagueStandingsResponse = z.infer<typeof leagueStandingsResponse>;
 export type LiveScoringResponse = z.infer<typeof liveScoringResponse>;
+export type PlayerRankingsResponse = z.infer<typeof playerRankingsResponse>;

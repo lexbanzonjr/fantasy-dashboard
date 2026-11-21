@@ -12,4 +12,14 @@ export const MIGRATIONS: string[] = [
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )`,
+  // 2: AI pickup research, one row per free agent per position and scoring period. Kept so a page
+  // visit shows the last run instead of paying for a new one.
+  `CREATE TABLE pickup_reports (
+    position TEXT NOT NULL,
+    period INTEGER NOT NULL,
+    player_id TEXT NOT NULL,
+    report_json TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (position, period, player_id)
+  )`,
 ];
