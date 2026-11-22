@@ -95,3 +95,11 @@ export interface FreeAgent {
   opponent: string | null;
   photo: string | null;
 }
+
+// A league's scoring, as short lines for the AI prompt. Built from CBS, so it differs by league.
+export interface LeagueScoring {
+  // e.g. "Passing TD: 4", "Passing Yards: +1 per 50 from 301 to 600; +1 bonus at 300+".
+  rules: string[];
+  // Starting slots, e.g. "QB ×1", "RB-WR-TE ×1".
+  lineup: string[];
+}

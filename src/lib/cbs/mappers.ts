@@ -1,4 +1,8 @@
 import type {
+  LeagueRulesResponse,
+  LeagueScoringCategoriesResponse,
+  LeagueScoringRulesResponse,
+  ScoringRuleRaw,
   LeagueDetailsResponse,
   LeagueRostersResponse,
   LeagueStandingsResponse,
@@ -6,7 +10,7 @@ import type {
   LiveScoringResponse,
   PlayerRankingsResponse,
 } from "./schemas";
-import type { FreeAgent, League, Matchup, MatchupSide, RosterPlayer, StandingRow, Team, TeamRoster } from "./types";
+import type { FreeAgent, League, LeagueScoring, Matchup, MatchupSide, RosterPlayer, StandingRow, Team, TeamRoster } from "./types";
 
 // Pure functions from parsed CBS responses to the app's types.
 
@@ -134,4 +138,55 @@ export function toFreeAgents(res: PlayerRankingsResponse, limit = 10): FreeAgent
       opponent: p.opponent,
       photo: p.photo,
     }));
+}
+
+const signed = (n: number) => (n > 0 ? `+${n}` : String(n));
+const span = (from: string | null, to: string | null) =>
+  to === "+" || to === null ? `${from}+` : from === to ? `${from}` : `${from} to ${to}`;
+
+// One rule as text, or null when it scores nothing. Ranges with `per` are "points per N units";
+// ranges without are tiers (e.g. points allowed 0 → +10).
+export function describeRule(rule: ScoringRuleRaw): string | null {
+  const parts: string[] = [];
+  if (rule.points !== null && rule.points !== undefined && rule.points !== 0) parts.push(signed(rule.points));
+  for (const r of rule.ranges) {
+    if (r.points === null || r.from === null) continue;
+    if (r.per) parts.push(`${signed(r.points)} per ${r.per} from ${span(r.from, r.to)}`);
+    else parts.push(`${span(r.from, r.to)} → ${signed(r.points)}`);
+  }
+  for (const b of rule.bonuses) {
+    if (b.points === null || b.from === null) continue;
+    parts.push(`${signed(b.points)} bonus at ${span(b.from, b.to)}`);
+  }
+  return parts.length ? parts.join("; ") : null;
+}
+
+// The league's scoring and lineup, whatever they are. Position-specific rules are listed only
+// where they differ from the league-wide rule for that stat.
+export function toLeagueScoring(
+  rules: LeagueScoringRulesResponse,
+  categories: LeagueScoringCategoriesResponse,
+  leagueRules: LeagueRulesResponse,
+): LeagueScoring {
+  const label = new Map(categories.body.categories.groups.flatMap((g) => g.cats.map((c) => [c.abbr, c.desc?.trim() || c.abbr])));
+  const name = (abbr: string) => label.get(abbr) ?? abbr;
+  const { categories: base, positions } = rules.body.scoring_rules;
+
+  const baseText = new Map(base.map((r) => [r.name, describeRule(r)]));
+  const lines = base.flatMap((r) => {
+    const text = baseText.get(r.name);
+    return text ? [`${name(r.name)}: ${text}`] : [];
+  });
+  for (const r of positions) {
+    const text = describeRule(r);
+    if (text && r.pos && text !== baseText.get(r.name)) lines.push(`${name(r.name)} (${r.pos} only): ${text}`);
+  }
+  if (!base.some((r) => r.name === "Recpt" && baseText.get("Recpt")) && !positions.some((r) => r.name === "Recpt" && describeRule(r))) {
+    lines.push("Reception: 0 (no points per reception)");
+  }
+
+  const lineup = (leagueRules.body.rules.roster?.positions ?? [])
+    .filter((p) => (p.max_active ?? 0) > 0)
+    .map((p) => `${p.abbr} ×${p.max_active}`);
+  return { rules: lines, lineup };
 }

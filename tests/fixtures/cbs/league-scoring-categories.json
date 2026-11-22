@@ -1,0 +1,196 @@
+{
+  "uri": "/league/scoring/categories",
+  "uriAlias": "/league/scoring/categories",
+  "statusMessage": "OK",
+  "statusCode": 200,
+  "body": {
+    "categories": {
+      "groups": [
+        {
+          "type": "ocats",
+          "cats": [
+            {
+              "type": "good",
+              "desc": "Field Goals",
+              "abbr": "FG",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "bad",
+              "desc": "Fumble Lost, Including ST plays",
+              "abbr": "FL",
+              "pct_use": " 81",
+              "scores_live": "Yes"
+            },
+            {
+              "abbr": "MFG",
+              "pct_use": " 34",
+              "scores_live": "Yes",
+              "type": "bad",
+              "desc": "Missed Field Goal",
+              "formula": "FGA - FG"
+            },
+            {
+              "abbr": "MXP",
+              "pct_use": " 31",
+              "scores_live": "Yes",
+              "type": "bad",
+              "desc": "Missed Extra Point",
+              "formula": "XPAtt - XP"
+            },
+            {
+              "type": "good",
+              "desc": "Passing Two-point Conversion",
+              "abbr": "Pa2P",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Passing Interception",
+              "abbr": "PaInt",
+              "pct_use": " 90",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Passing TD",
+              "abbr": "PaTD",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Passing Yards",
+              "abbr": "PaYd",
+              "pct_use": " 96",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Receiving Two-point Conversion",
+              "abbr": "Re2P",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Receiving TD",
+              "abbr": "ReTD",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Reception",
+              "abbr": "Recpt",
+              "pct_use": " 70",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Rushing Two-point Conversion",
+              "abbr": "Ru2P",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "abbr": "RuReYd",
+              "pct_use": "  6",
+              "scores_live": "Yes",
+              "type": "good",
+              "desc": "Rushing and Receiving Yards",
+              "formula": "RuYd + ReYd"
+            },
+            {
+              "type": "good",
+              "desc": "Rushing TD",
+              "abbr": "RuTD",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Extra Points",
+              "abbr": "XP",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            }
+          ],
+          "name": "Offensive"
+        },
+        {
+          "type": "dcats",
+          "cats": [
+            {
+              "type": "good",
+              "desc": "Blocked Field Goals (ID/ST/DST)",
+              "abbr": "BFB",
+              "pct_use": " 36",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Blocked Extra Points (ID/ST/DST)",
+              "abbr": "BXP",
+              "pct_use": " 27",
+              "scores_live": "No"
+            },
+            {
+              "type": "good",
+              "desc": "Defensive/ST Fumble Recovered (ID/DT/DST)",
+              "abbr": "DFR",
+              "pct_use": " 98",
+              "scores_live": "Yes"
+            },
+            {
+              "abbr": "DTD",
+              "pct_use": " 92",
+              "scores_live": "Yes",
+              "type": "good",
+              "desc": "Total Defensive and Special Teams TD",
+              "formula": "IntTD + PRTD + KRTD + DFRTD + BFTD + BPTD + SFRTD + KORECTD"
+            },
+            {
+              "type": "good",
+              "desc": "Interceptions",
+              "abbr": "Int",
+              "pct_use": "100",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "bad",
+              "desc": "Points Against, Total Points Scored",
+              "abbr": "PA",
+              "pct_use": " 66",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Sack",
+              "abbr": "SACK",
+              "pct_use": "100",
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Safety",
+              "abbr": "STY",
+              "pct_use": 100,
+              "scores_live": "Yes"
+            },
+            {
+              "type": "good",
+              "desc": "Turnover on Downs",
+              "abbr": "TOD",
+              "pct_use": "Less than 5",
+              "scores_live": "Yes"
+            }
+          ],
+          "name": "Defensive"
+        }
+      ]
+    }
+  }
+}
