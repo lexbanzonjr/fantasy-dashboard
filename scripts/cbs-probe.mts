@@ -67,10 +67,17 @@ const endpoints: [string, string, Record<string, string>?][] = [
   ["league-standings", "league/standings/overall"],
   ["league-scoring-live", "league/scoring/live"],
   ["league-schedules", "league/schedules"],
+  ["league-scoring-rules", "league/scoring/rules"],
+  ["league-scoring-categories", "league/scoring/categories"],
+  ["league-rules", "league/rules"],
 ];
+
+// PROBE_ONLY=league-rules,league-scoring-rules refreshes just those fixtures.
+const only = process.env.PROBE_ONLY?.split(",").map((s) => s.trim()).filter(Boolean);
 
 let firstTeamId: string | undefined;
 for (const [name, endpoint, params] of endpoints) {
+  if (only && !only.includes(name)) continue;
   const { status, body } = await get(endpoint, params);
   save(name, status, body);
   if (name === "league-teams") {
@@ -79,7 +86,9 @@ for (const [name, endpoint, params] of endpoints) {
   }
 }
 
-if (firstTeamId) {
+if (only && !only.includes("league-rosters")) {
+  // skipped
+} else if (firstTeamId) {
   const { status, body } = await get("league/rosters", { team_id: firstTeamId });
   save("league-rosters", status, body);
 } else {

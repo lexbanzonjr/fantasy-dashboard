@@ -150,3 +150,43 @@ export type LeagueRostersResponse = z.infer<typeof leagueRostersResponse>;
 export type LeagueStandingsResponse = z.infer<typeof leagueStandingsResponse>;
 export type LiveScoringResponse = z.infer<typeof liveScoringResponse>;
 export type PlayerRankingsResponse = z.infer<typeof playerRankingsResponse>;
+
+// Scoring rules. Every field can be missing or null; points are numeric strings.
+const looseNum = z.union([z.number(), z.string()]).nullish().transform((v) => (v === null || v === undefined || v === "" ? null : Number(v)));
+const looseBound = z.union([z.number(), z.string()]).nullish().transform((v) => (v === null || v === undefined ? null : String(v)));
+const scoringRule = z.object({
+  name: z.string(),
+  pos: z.string().optional(),
+  group: z.string().optional(),
+  points: looseNum.optional(),
+  bonuses: z.array(z.object({ from: looseBound, to: looseBound, points: looseNum })).default([]),
+  ranges: z.array(z.object({ from: looseBound, to: looseBound, points: looseNum, per: looseNum.optional() })).default([]),
+});
+export type ScoringRuleRaw = z.infer<typeof scoringRule>;
+
+export const leagueScoringRulesResponse = envelope(
+  z.object({
+    scoring_rules: z.object({ categories: z.array(scoringRule).default([]), positions: z.array(scoringRule).default([]) }),
+  }),
+);
+export type LeagueScoringRulesResponse = z.infer<typeof leagueScoringRulesResponse>;
+
+export const leagueScoringCategoriesResponse = envelope(
+  z.object({
+    categories: z.object({
+      groups: z.array(z.object({ cats: z.array(z.object({ abbr: z.string(), desc: z.string().optional() })).default([]) })).default([]),
+    }),
+  }),
+);
+export type LeagueScoringCategoriesResponse = z.infer<typeof leagueScoringCategoriesResponse>;
+
+export const leagueRulesResponse = envelope(
+  z.object({
+    rules: z.object({
+      roster: z
+        .object({ positions: z.array(z.object({ abbr: z.string(), max_active: looseNum })).default([]) })
+        .optional(),
+    }),
+  }),
+);
+export type LeagueRulesResponse = z.infer<typeof leagueRulesResponse>;

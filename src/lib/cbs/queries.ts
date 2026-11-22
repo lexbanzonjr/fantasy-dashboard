@@ -3,10 +3,13 @@ import { cache } from "react";
 import { cbsFetch, type CbsAuth } from "./client";
 import type { PickupPosition } from "./types";
 import { connectionToken, readConnection, type Connection } from "./connection";
-import { toFreeAgents, toLeague, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
+import { toFreeAgents, toLeague, toLeagueScoring, toMatchup, toRoster, toStandings, toTeams } from "./mappers";
 import {
   leagueDetailsResponse,
   leagueRostersResponse,
+  leagueRulesResponse,
+  leagueScoringCategoriesResponse,
+  leagueScoringRulesResponse,
   leagueStandingsResponse,
   leagueTeamsResponse,
   liveScoringResponse,
@@ -52,3 +55,13 @@ export const getMatchup = cache(async (auth: CbsAuth, teamId: string | null) =>
 export const getFreeAgents = cache(async (auth: CbsAuth, position: PickupPosition, limit = 10) =>
   toFreeAgents(await cbsFetch(playerRankingsResponse, "players/rankings", auth, { position }, SLOW), limit),
 );
+
+// The connected league's scoring rules and starting lineup.
+export const getLeagueScoring = cache(async (auth: CbsAuth) => {
+  const [rules, categories, leagueRules] = await Promise.all([
+    cbsFetch(leagueScoringRulesResponse, "league/scoring/rules", auth, {}, SLOW),
+    cbsFetch(leagueScoringCategoriesResponse, "league/scoring/categories", auth, {}, SLOW),
+    cbsFetch(leagueRulesResponse, "league/rules", auth, {}, SLOW),
+  ]);
+  return toLeagueScoring(rules, categories, leagueRules);
+});

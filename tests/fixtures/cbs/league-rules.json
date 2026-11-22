@@ -1,0 +1,279 @@
+{
+  "uri": "/league/rules",
+  "body": {
+    "rules": {
+      "player_pool": {
+        "value": "both",
+        "description": "AFC and NFC Players."
+      },
+      "transactions": {
+        "add_drop_deadline": {
+          "value": "game_time",
+          "description": "Transactions will lock five minutes before gametime for each player."
+        },
+        "add_drop_waiver_run": {
+          "value": {
+            "days": "23456"
+          },
+          "description": "The waiver process runs on Tuesday, Wednesday, Thursday, Friday and Saturday night."
+        },
+        "add_drop_waiver_period": {
+          "value": "1",
+          "description": "Dropped players remain on waivers for at least 1 day(s)."
+        },
+        "add_drop_faab_starting_budget": {
+          "value": "$100",
+          "description": "Each team will have a starting budget of $100."
+        },
+        "lineup_policy": {
+          "value": "free_for_all",
+          "description": "Managers may set lineups and change players' positions from a list of their eligible positions."
+        },
+        "draft_pick_trades": {
+          "value": null,
+          "description": null
+        },
+        "lineup_deadline": {
+          "value": "game_time",
+          "description": "Lineup deadline is five minutes before gametime for each player."
+        },
+        "accelerated_waivers": {
+          "value": "on",
+          "description": null
+        },
+        "trade_post_season": {
+          "value": 1,
+          "description": "Managers may make trades during the offseason."
+        },
+        "add_drop_policy": {
+          "value": "faab_auto",
+          "description": "Add/Drops are handled by a waivers process."
+        },
+        "lineup_effective": "",
+        "add_drop_limit": {
+          "value": null,
+          "description": "No Limit"
+        },
+        "enforce_coming_off_i_ml": {
+          "value": 1,
+          "description": "Enforce Lineup Policy when players come off the IR/PUP etc."
+        },
+        "add_drops_are_disabled": {
+          "value": 0,
+          "description": null
+        },
+        "provide_full_report": {
+          "value": 1,
+          "description": "FAB full report will be available for all members."
+        },
+        "trade_deadline": {
+          "value": 20261114,
+          "description": "No trades can be made after the trade deadline of 11:59 pm et 11/14/26."
+        },
+        "add_drop_faab_save_winning_bid": {
+          "value": 0,
+          "description": "Do Not Save Winning Offers"
+        },
+        "trade_policy": {
+          "value": "free_for_all",
+          "description": "Trades will process immediately."
+        },
+        "add_drops_waivers_free_agents": {
+          "value": "until_add_drop_deadline",
+          "description": "All players always on FAB, except Sundays and Mondays where eligible players will be Free Agents until Add/Drop deadline"
+        },
+        "add_drop_faab_zero_bids": {
+          "value": "on",
+          "description": "Zero offers <b>are</b> allowed."
+        },
+        "add_drop_faab_minimum_offer": {
+          "value": 0,
+          "description": 0
+        },
+        "add_drops_waivers_free_agents_budget": {
+          "value": "0",
+          "description": "Free Agents Transactions will have a cost of 0."
+        },
+        "lineup_restrict_i_status": {
+          "value": 0,
+          "description": "All players are eligible."
+        },
+        "add_drop_waiver_reset": {
+          "value": "weekly",
+          "description": "The waiver order resets after each weeks' games."
+        }
+      },
+      "roster": {
+        "positions": [
+          {
+            "min_active": "1",
+            "max_active": "1",
+            "abbr": "QB",
+            "max_total": "2"
+          },
+          {
+            "min_active": "2",
+            "max_active": "2",
+            "abbr": "RB",
+            "max_total": "4"
+          },
+          {
+            "min_active": "1",
+            "max_active": "1",
+            "abbr": "RB-WR-TE",
+            "max_total": "9"
+          },
+          {
+            "min_active": "3",
+            "max_active": "3",
+            "abbr": "WR-TE",
+            "max_total": "5"
+          },
+          {
+            "min_active": "1",
+            "max_active": "1",
+            "abbr": "K",
+            "max_total": "2"
+          },
+          {
+            "min_active": "1",
+            "max_active": "1",
+            "abbr": "DST",
+            "max_total": "2"
+          }
+        ],
+        "ignore_roster_limits": 0,
+        "practice_squad_players_dont_count_against_roster_limits": 0,
+        "injured_players_dont_count_against_roster_limits": "1",
+        "statuses": [
+          {
+            "description": "Active Players",
+            "min": "9",
+            "max": "9"
+          },
+          {
+            "description": "Reserve Players",
+            "min": "6",
+            "max": "6"
+          },
+          {
+            "description": "Injured Players",
+            "min": "0",
+            "max": "4"
+          },
+          {
+            "description": "Practice Players",
+            "min": "0",
+            "max": "0"
+          },
+          {
+            "description": "Total Players",
+            "min": "15",
+            "max": "19"
+          }
+        ],
+        "enforce_strict_pos_limits_on_add_drops": "",
+        "illegal_rosters_score_zero": ""
+      },
+      "scoring_system": {
+        "standings_tiebreaker": "Ties in the standings are resolved in this order: Winning Percentage, Head to Head Record, Total Points.",
+        "win_determination": "points",
+        "type": "h2h",
+        "scoring_period": "Scoring based on total stats each period.",
+        "scoring_system": "Head-to-Head, Points",
+        "matchup_tiebreaker": "No tiebreaker. Ties are allowed.",
+        "has_weights": 0
+      },
+      "eligibility": {
+        "player_elig": "Players are eligible at their primary position."
+      },
+      "scoring_system_rows": [
+        "scoring_system",
+        "scoring_period",
+        "matchup_tiebreaker"
+      ],
+      "schedule": {
+        "division_winner_tiebreakers": {
+          "short_label": "Division Tiebreaker Order",
+          "value": "Ties for division winner are resolved using standings tiebreakers",
+          "label": "Division Winner Tiebreaker",
+          "short_description": "Winning Pct, Head-to-Head, Total Points"
+        },
+        "playoffs_start": {
+          "value": "Week 15",
+          "label": "Playoffs Start",
+          "short_description": "Week 15"
+        },
+        "automatic_playoffs": {
+          "short_label": "Automated Setup",
+          "value": "No",
+          "label": "Automatic Playoffs",
+          "short_description": "Off"
+        },
+        "playoffs_last": {
+          "value": "4 Weeks",
+          "label": "Playoffs Last",
+          "short_description": "4 weeks"
+        },
+        "archive": {
+          "value": "Yes",
+          "label": "Archive Standings",
+          "short_description": "On"
+        },
+        "playoffs_matchup_tiebreaker": {
+          "short_label": "Playoff Matchup Tiebreaker",
+          "value": "Playoff ties go to the team with more points from Reserves.",
+          "label": "Playoffs Matchup Tiebreaker",
+          "short_description": "Team with most total points by reserve players wins."
+        },
+        "standings_tiebreakers": {
+          "short_label": "Standings Tiebreaker Order",
+          "value": "Ties in the standings are resolved in this order: Winning Percentage, Head to Head Record, Total Points.",
+          "label": "Standings Tiebreaker",
+          "short_description": "Winning Percentage, Head to Head Record, Total Points"
+        },
+        "matchups": {
+          "short_label": "Matchups Per Week",
+          "value": "1",
+          "label": "Matchups Per Period",
+          "short_description": "1"
+        }
+      },
+      "fees": {
+        "drop_cost": {
+          "short_label": "Drop Player",
+          "value": "5",
+          "label": "Drop Fee"
+        },
+        "from_ir_cost": {
+          "short_label": "Move Player from Injured",
+          "value": "10",
+          "label": "Move from Injured Fee"
+        },
+        "track_finances": {
+          "short_label": "Track Finances",
+          "value": 1,
+          "label": "Track Finances"
+        },
+        "to_ir_cost": {
+          "short_label": "Move Player to Injured",
+          "value": "10",
+          "label": "Move to Injured Fee"
+        },
+        "add_cost": {
+          "short_label": "Add Player",
+          "value": "5",
+          "label": "Add Fee"
+        },
+        "entry_fee": {
+          "short_label": "League Entry Fee",
+          "value": "320",
+          "label": "League Entry Fee"
+        }
+      }
+    }
+  },
+  "uriAlias": "/league/rules",
+  "statusCode": 200,
+  "statusMessage": "OK"
+}

@@ -51,6 +51,28 @@ describe("buildPickupPrompt", () => {
     expect(prompt).toContain("Ankle: Out");
   });
 
+  it("uses the league's own scoring rules and lineup when given", () => {
+    // Arrange
+    const scoring = { rules: ["Passing TD: +6", "Reception (TE only): +1.5"], lineup: ["QB ×1", "FLEX ×2"] };
+
+    // Act
+    const prompt = buildPickupPrompt(agent, { ...ctx, scoring });
+
+    // Assert
+    expect(prompt).toContain("League scoring rules:\n- Passing TD: +6\n- Reception (TE only): +1.5");
+    expect(prompt).toContain("Starting lineup: QB ×1, FLEX ×2");
+    expect(prompt).not.toContain("PPR league");
+  });
+
+  it("falls back to the PPR flag without scoring rules", () => {
+    // Act
+    const prompt = buildPickupPrompt(agent, { ...ctx, isPpr: false });
+
+    // Assert
+    expect(prompt).toContain("standard (non-PPR) league");
+    expect(prompt).not.toContain("League scoring rules");
+  });
+
   it("says none when I have nobody at the position", () => {
     // Act
     const prompt = buildPickupPrompt({ ...agent, position: "TE" }, ctx);

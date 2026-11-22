@@ -2,7 +2,7 @@ import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { z } from "zod";
 import type { AiModel } from "@/lib/ai/model";
 import { samePosition } from "@/lib/cbs/mappers";
-import type { FreeAgent, RosterPlayer } from "@/lib/cbs/types";
+import type { FreeAgent, LeagueScoring, RosterPlayer } from "@/lib/cbs/types";
 
 export const pickupReportSchema = z.object({
   score: z.number().int().min(0).max(100),
@@ -20,6 +20,8 @@ export interface PickupContext {
   roster: RosterPlayer[];
   isPpr: boolean;
   week: number;
+  // The league's own scoring and lineup. Without it the prompt falls back to the PPR flag.
+  scoring?: LeagueScoring;
 }
 
 const describe = (p: { name: string; position: string; proTeam: string; byeWeek: number | null; injury: string | null; opponent: string | null }) =>
@@ -34,8 +36,15 @@ export function buildPickupPrompt(agent: FreeAgent, ctx: PickupContext): string 
   const myLines = mine.length
     ? mine.map((p) => `- id ${p.id}: ${describe(p)}, projected ${p.projectedPoints ?? "n/a"} pts, ${p.isStarter ? "starter" : "bench"}`).join("\n")
     : "- (none)";
+  const league = ctx.scoring
+    ? [
+        `You are a fantasy football analyst. It is week ${ctx.week}. This league has its own scoring; value players by these rules, not generic PPR or standard rankings.`,
+        `League scoring rules:\n${ctx.scoring.rules.map((r) => `- ${r}`).join("\n")}`,
+        ...(ctx.scoring.lineup.length ? [`Starting lineup: ${ctx.scoring.lineup.join(", ")}`] : []),
+      ]
+    : [`You are a fantasy football analyst. It is week ${ctx.week} of a ${ctx.isPpr ? "PPR" : "standard (non-PPR)"} league.`];
   return [
-    `You are a fantasy football analyst. It is week ${ctx.week} of a ${ctx.isPpr ? "PPR" : "standard (non-PPR)"} league.`,
+    ...league,
     `Free agent: ${describe(agent)}, CBS position rank ${agent.rank}${agent.onWaivers ? ", on waivers (needs a FAAB claim)" : ""}.`,
     `My players at the same position:\n${myLines}`,
     "Search the web for this player's latest news (injuries, depth chart, usage, matchups) from the past two weeks.",
