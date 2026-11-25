@@ -38,7 +38,7 @@ export default async function PickupsPage({ searchParams }: PageProps<"/pickups"
     <div className="grid gap-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Recommended pickups</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Recommended pickups</h1>
           <p className="text-sm text-muted-foreground">
             Week {league.currentPeriod} · top {agents.length} free agents at {position}
             {lastRun && ` · researched ${new Date(lastRun).toLocaleString()}`}
