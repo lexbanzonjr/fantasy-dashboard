@@ -15,6 +15,14 @@ export const pickupReportSchema = z.object({
 });
 export type PickupReport = z.infer<typeof pickupReportSchema>;
 
+// How the model got to its report: the prompt it was sent, then its thinking, searches and notes in order.
+export const pickupTraceSchema = z.object({
+  prompt: z.string(),
+  steps: z.array(z.object({ kind: z.enum(["thinking", "search", "text"]), text: z.string() })),
+});
+export type PickupTrace = z.infer<typeof pickupTraceSchema>;
+type TraceStep = PickupTrace["steps"][number];
+
 export interface PickupContext {
   // My rostered players; only the same-position ones are offered as drops.
   roster: RosterPlayer[];
@@ -60,19 +68,50 @@ export function sanitizeReport(report: PickupReport, agent: FreeAgent, roster: R
   return ok ? report : { ...report, dropPlayerId: null, dropReason: null };
 }
 
-export async function researchPickup(ai: AiModel, agent: FreeAgent, ctx: PickupContext): Promise<PickupReport> {
-  const res = await ai.client.messages.parse({
-    model: ai.model,
-    max_tokens: 4096,
-    tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 3 }],
-    output_config: { format: zodOutputFormat(pickupReportSchema) },
-    messages: [{ role: "user", content: buildPickupPrompt(agent, ctx) }],
+// Pulls the readable steps out of a response. The last text block is the JSON report itself, so it's left out;
+// search results are left out too since the report lists its sources.
+export function extractTrace(prompt: string, content: readonly { type: string }[]): PickupTrace {
+  const lastText = content.findLastIndex((b) => b.type === "text");
+  const steps = content.flatMap((block, i): TraceStep[] => {
+    if (block.type === "thinking") {
+      const text = (block as { thinking?: string }).thinking?.trim();
+      return text ? [{ kind: "thinking", text }] : [];
+    }
+    if (block.type === "server_tool_use" && (block as { name?: string }).name === "web_search") {
+      const query = (block as { input?: { query?: unknown } }).input?.query;
+      return typeof query === "string" && query ? [{ kind: "search", text: query }] : [];
+    }
+    if (block.type === "text" && i !== lastText) {
+      const text = (block as { text?: string }).text?.trim();
+      return text ? [{ kind: "text", text }] : [];
+    }
+    return [];
   });
-  if (!res.parsed_output) throw new Error(`No report for ${agent.name} (stop reason: ${res.stop_reason}).`);
-  return sanitizeReport(res.parsed_output, agent, ctx.roster);
+  return { prompt, steps };
 }
 
-export type PickupResult = { playerId: string; report: PickupReport } | { playerId: string; error: string };
+export interface PickupResearch {
+  report: PickupReport;
+  trace: PickupTrace;
+}
+
+export async function researchPickup(ai: AiModel, agent: FreeAgent, ctx: PickupContext): Promise<PickupResearch> {
+  const prompt = buildPickupPrompt(agent, ctx);
+  const res = await ai.client.messages.parse({
+    model: ai.model,
+    // Room for thinking plus the report, so the JSON isn't cut off.
+    max_tokens: 16000,
+    // "summarized" so the thinking text comes back; it's empty by default on current models.
+    thinking: { type: "adaptive", display: "summarized" },
+    tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 3 }],
+    output_config: { format: zodOutputFormat(pickupReportSchema) },
+    messages: [{ role: "user", content: prompt }],
+  });
+  if (!res.parsed_output) throw new Error(`No report for ${agent.name} (stop reason: ${res.stop_reason}).`);
+  return { report: sanitizeReport(res.parsed_output, agent, ctx.roster), trace: extractTrace(prompt, res.content) };
+}
+
+export type PickupResult = { playerId: string; report: PickupReport; trace: PickupTrace } | { playerId: string; error: string };
 
 // Researches every free agent, a few at a time. One player failing doesn't sink the rest.
 export async function researchPickups(
@@ -89,7 +128,7 @@ export async function researchPickups(
       const i = next++;
       const agent = agents[i]!;
       try {
-        results[i] = { playerId: agent.id, report: await research(ai, agent, ctx) };
+        results[i] = { playerId: agent.id, ...(await research(ai, agent, ctx)) };
       } catch (e) {
         results[i] = { playerId: agent.id, error: e instanceof Error ? e.message : String(e) };
       }
@@ -102,19 +141,26 @@ export async function researchPickups(
 export interface PickupRow {
   agent: FreeAgent;
   report: PickupReport | null;
+  // How the AI got there; null for reports saved before traces were kept.
+  trace: PickupTrace | null;
   // The suggested drop, looked up on my roster.
   drop: RosterPlayer | null;
 }
 
 // Pairs each free agent with its cached report. Researched players come first, best score first;
 // the rest keep CBS's rank order.
-export function toPickupRows(agents: FreeAgent[], reports: { playerId: string; report: PickupReport }[], roster: RosterPlayer[]): PickupRow[] {
-  const byId = new Map(reports.map((r) => [r.playerId, r.report]));
+export function toPickupRows(
+  agents: FreeAgent[],
+  reports: { playerId: string; report: PickupReport; trace?: PickupTrace | null }[],
+  roster: RosterPlayer[],
+): PickupRow[] {
+  const byId = new Map(reports.map((r) => [r.playerId, r]));
   return agents
     .map((agent) => {
-      const report = byId.get(agent.id) ?? null;
+      const cached = byId.get(agent.id);
+      const report = cached?.report ?? null;
       const drop = report?.dropPlayerId ? (roster.find((p) => p.id === report.dropPlayerId) ?? null) : null;
-      return { agent, report, drop };
+      return { agent, report, trace: cached?.trace ?? null, drop };
     })
     .sort((a, b) => (b.report?.score ?? -1) - (a.report?.score ?? -1) || a.agent.rank - b.agent.rank);
 }
