@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type { AiModel } from "@/lib/ai/model";
-import { buildPickupPrompt, pickupReportSchema, researchPickup, researchPickups, sanitizeReport, toPickupRows, type PickupReport } from "@/lib/ai/pickups";
+import { buildPickupPrompt, extractTrace, pickupReportSchema, researchPickup, researchPickups, sanitizeReport, toPickupRows, type PickupReport, type PickupTrace } from "@/lib/ai/pickups";
 import type { FreeAgent, RosterPlayer } from "@/lib/cbs/types";
 
 const agent: FreeAgent = {
@@ -17,6 +17,7 @@ const report: PickupReport = {
   score: 72, verdict: "add", newsSummary: "Starter hurt.", sources: [{ title: "News", url: "https://x.test" }],
   dropPlayerId: "rb1", dropReason: "Out for the season.",
 };
+const trace: PickupTrace = { prompt: "p", steps: [{ kind: "search", text: "Free Back news" }] };
 const fakeAi = (parse: ReturnType<typeof vi.fn>) => ({ client: { messages: { parse } }, model: "m" }) as unknown as AiModel;
 
 describe("pickupReportSchema", () => {
@@ -111,14 +112,35 @@ describe("sanitizeReport", () => {
 describe("researchPickup", () => {
   it("asks the model with web search and returns the parsed report", async () => {
     // Arrange
-    const parse = vi.fn().mockResolvedValue({ parsed_output: report, stop_reason: "end_turn" });
+    const parse = vi.fn().mockResolvedValue({ parsed_output: report, stop_reason: "end_turn", content: [] });
 
     // Act
     const result = await researchPickup(fakeAi(parse), agent, ctx);
 
     // Assert
-    expect(result).toEqual(report);
+    expect(result.report).toEqual(report);
     expect(parse.mock.calls[0]![0].tools[0]).toMatchObject({ name: "web_search" });
+  });
+
+  it("turns on summarized thinking and returns the prompt and steps as a trace", async () => {
+    // Arrange
+    const content = [
+      { type: "thinking", thinking: "Check his snap share." },
+      { type: "server_tool_use", name: "web_search", input: { query: "Free Back snaps" } },
+      { type: "text", text: "{\"score\":72}" },
+    ];
+    const parse = vi.fn().mockResolvedValue({ parsed_output: report, stop_reason: "end_turn", content });
+
+    // Act
+    const result = await researchPickup(fakeAi(parse), agent, ctx);
+
+    // Assert
+    expect(parse.mock.calls[0]![0].thinking).toEqual({ type: "adaptive", display: "summarized" });
+    expect(result.trace.prompt).toBe(buildPickupPrompt(agent, ctx));
+    expect(result.trace.steps).toEqual([
+      { kind: "thinking", text: "Check his snap share." },
+      { kind: "search", text: "Free Back snaps" },
+    ]);
   });
 
   it("throws when the model returns no report", async () => {
@@ -130,20 +152,63 @@ describe("researchPickup", () => {
   });
 });
 
+describe("extractTrace", () => {
+  it("keeps thinking, searches and notes in order and leaves out the final report", () => {
+    // Arrange
+    const content = [
+      { type: "thinking", thinking: "First look at injuries." },
+      { type: "server_tool_use", name: "web_search", input: { query: "injury news" } },
+      { type: "web_search_tool_result", content: [] },
+      { type: "text", text: "He is the starter now." },
+      { type: "thinking", thinking: "Worth an add." },
+      { type: "text", text: "{\"score\":80}" },
+    ];
+
+    // Act
+    const result = extractTrace("prompt", content);
+
+    // Assert
+    expect(result).toEqual({
+      prompt: "prompt",
+      steps: [
+        { kind: "thinking", text: "First look at injuries." },
+        { kind: "search", text: "injury news" },
+        { kind: "text", text: "He is the starter now." },
+        { kind: "thinking", text: "Worth an add." },
+      ],
+    });
+  });
+
+  it("skips empty thinking and searches without a query", () => {
+    // Arrange
+    const content = [
+      { type: "thinking", thinking: "" },
+      { type: "server_tool_use", name: "web_search", input: {} },
+      { type: "text", text: "{}" },
+    ];
+
+    // Act
+    const result = extractTrace("prompt", content);
+
+    // Assert
+    expect(result.steps).toEqual([]);
+  });
+});
+
 describe("researchPickups", () => {
   it("keeps results in order and records failures per player", async () => {
     // Arrange
     const agents = ["a", "b", "c"].map((id) => ({ ...agent, id }));
     const research = vi.fn(async (_ai: AiModel, a: FreeAgent) => {
       if (a.id === "b") throw new Error("boom");
-      return report;
+      return { report, trace };
     });
 
     // Act
     const results = await researchPickups(fakeAi(vi.fn()), agents, ctx, 2, research);
 
     // Assert
-    expect(results).toEqual([{ playerId: "a", report }, { playerId: "b", error: "boom" }, { playerId: "c", report }]);
+    expect(results).toEqual([{ playerId: "a", report, trace }, { playerId: "b", error: "boom" }, { playerId: "c", report, trace }]);
   });
 
   it("runs no more than the concurrency limit at once", async () => {
@@ -155,7 +220,7 @@ describe("researchPickups", () => {
       peak = Math.max(peak, ++running);
       await new Promise((r) => setTimeout(r, 1));
       running--;
-      return report;
+      return { report, trace };
     };
 
     // Act
@@ -200,6 +265,14 @@ describe("toPickupRows", () => {
     const [row] = toPickupRows([agent], [], roster);
 
     // Assert
-    expect(row).toMatchObject({ report: null, drop: null });
+    expect(row).toMatchObject({ report: null, trace: null, drop: null });
+  });
+
+  it("carries the cached trace onto the row", () => {
+    // Act
+    const [row] = toPickupRows([agent], [{ playerId: agent.id, report, trace }], roster);
+
+    // Assert
+    expect(row!.trace).toEqual(trace);
   });
 });

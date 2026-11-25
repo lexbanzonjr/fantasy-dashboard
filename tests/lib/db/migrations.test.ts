@@ -48,6 +48,24 @@ describe("pickup_reports", () => {
   });
 });
 
+describe("trace_json migration", () => {
+  it("adds a nullable trace_json column and keeps existing reports", async () => {
+    // Arrange
+    const db = createClient({ url: ":memory:" });
+    await db.execute(MIGRATIONS[0]!);
+    await db.execute(MIGRATIONS[1]!);
+    await db.execute("PRAGMA user_version = 2");
+    await db.execute("INSERT INTO pickup_reports VALUES ('RB', 11, 'p1', '{}', 'now')");
+
+    // Act
+    await migrate(db);
+
+    // Assert
+    const row = (await db.execute("SELECT report_json, trace_json FROM pickup_reports")).rows[0]!;
+    expect(row).toMatchObject({ report_json: "{}", trace_json: null });
+  });
+});
+
 describe("cbs_connection", () => {
   it("rejects any id other than 1", async () => {
     // Arrange

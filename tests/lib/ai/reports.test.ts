@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { PickupReport } from "@/lib/ai/pickups";
+import type { PickupReport, PickupTrace } from "@/lib/ai/pickups";
 import { getCachedReports, saveReports } from "@/lib/ai/reports";
 import { openDatabase } from "@/lib/db/index";
 
@@ -17,7 +17,7 @@ describe("pickup report cache", () => {
     const cached = await getCachedReports("RB", 11, db);
 
     // Assert
-    expect(cached).toEqual([{ playerId: "p1", report, createdAt: expect.any(String) }]);
+    expect(cached).toEqual([{ playerId: "p1", report, trace: null, createdAt: expect.any(String) }]);
   });
 
   it("doesn't return another position or week", async () => {
@@ -55,5 +55,33 @@ describe("pickup report cache", () => {
 
     // Assert
     expect(cached).toEqual([]);
+  });
+
+  it("round-trips the trace saved with a report", async () => {
+    // Arrange
+    const db = await openDatabase(":memory:");
+    const trace: PickupTrace = { prompt: "p", steps: [{ kind: "thinking", text: "hmm" }, { kind: "search", text: "q" }] };
+    await saveReports("RB", 11, [{ playerId: "p1", report, trace }], db);
+
+    // Act
+    const [cached] = await getCachedReports("RB", 11, db);
+
+    // Assert
+    expect(cached!.trace).toEqual(trace);
+  });
+
+  it("keeps the report when its trace is malformed", async () => {
+    // Arrange
+    const db = await openDatabase(":memory:");
+    await db.execute({
+      sql: "INSERT INTO pickup_reports (position, period, player_id, report_json, trace_json, created_at) VALUES ('RB', 11, 'p1', ?, 'not json', 'now')",
+      args: [JSON.stringify(report)],
+    });
+
+    // Act
+    const cached = await getCachedReports("RB", 11, db);
+
+    // Assert
+    expect(cached).toEqual([{ playerId: "p1", report, trace: null, createdAt: "now" }]);
   });
 });
