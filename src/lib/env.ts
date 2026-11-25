@@ -4,8 +4,8 @@ import { z } from "zod";
 
 export interface Env {
   dataDir: string;
-  // Public URL of the app, used by the CBS bookmarklet.
-  siteUrl: string;
+  // Public URL of the app, used by the CBS bookmarklet. Null: use the request's host.
+  siteUrl: string | null;
   // The one login. Null until set; the app refuses to serve pages without it.
   authUsername: string | null;
   authPassword: string | null;
@@ -38,7 +38,7 @@ export function parseEnv(raw: Record<string, string | undefined>, cwd = process.
   const e = parsed.data;
   return {
     dataDir: path.resolve(cwd, e.DATA_DIR?.trim() || "data"),
-    siteUrl: (e.NEXT_PUBLIC_SITE_URL || "http://localhost:6972").replace(/\/+$/, ""),
+    siteUrl: e.NEXT_PUBLIC_SITE_URL ? e.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, "") : null,
     authUsername: e.AUTH_USERNAME?.trim() || null,
     authPassword: e.AUTH_PASSWORD || null,
     sessionSecret: e.SESSION_SECRET?.trim() || null,
