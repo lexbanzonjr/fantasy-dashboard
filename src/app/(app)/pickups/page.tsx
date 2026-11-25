@@ -1,6 +1,6 @@
 import { requireSignIn } from "@/lib/auth/server";
 import { getModel } from "@/lib/ai/model";
-import { toPickupRows, type PickupRow } from "@/lib/ai/pickups";
+import { toPickupRows, type PickupRow, type PickupTrace } from "@/lib/ai/pickups";
 import { getCachedReports } from "@/lib/ai/reports";
 import { CbsAuthError } from "@/lib/cbs/client";
 import { getCbsContext, getFreeAgents, getLeague, getRoster } from "@/lib/cbs/queries";
@@ -55,7 +55,33 @@ export default async function PickupsPage({ searchParams }: PageProps<"/pickups"
   );
 }
 
-function PickupCard({ row: { agent, report, drop } }: { row: PickupRow }) {
+// The prompt Claude got, then what it thought, searched for and noted, in order. Plain text only.
+function TraceDetails({ trace }: { trace: PickupTrace }) {
+  return (
+    <details className="rounded-md border px-3 py-2 text-xs">
+      <summary className="cursor-pointer text-muted-foreground hover:text-foreground">How the AI decided</summary>
+      <div className="mt-3 grid gap-3">
+        <div className="grid gap-1">
+          <p className="font-medium">Prompt</p>
+          <pre className="whitespace-pre-wrap break-words rounded bg-muted p-2 font-mono">{trace.prompt}</pre>
+        </div>
+        {trace.steps.length > 0 ? (
+          <ol className="grid gap-2">
+            {trace.steps.map((step, i) => (
+              <li key={i} className={step.kind === "search" ? "font-medium" : "whitespace-pre-wrap text-muted-foreground"}>
+                {step.kind === "search" ? `🔍 Searched: ${step.text}` : step.kind === "thinking" ? `💭 ${step.text}` : step.text}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="text-muted-foreground">No thinking or searches were returned.</p>
+        )}
+      </div>
+    </details>
+  );
+}
+
+function PickupCard({ row: { agent, report, trace, drop } }: { row: PickupRow }) {
   return (
     <Card>
       <CardHeader>
@@ -103,6 +129,7 @@ function PickupCard({ row: { agent, report, drop } }: { row: PickupRow }) {
                 "No drop suggested."
               )}
             </p>
+            {trace && <TraceDetails trace={trace} />}
           </>
         ) : (
           <p className="text-muted-foreground">Not researched yet.</p>
