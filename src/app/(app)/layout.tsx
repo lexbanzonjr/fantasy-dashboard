@@ -4,14 +4,7 @@ import { requireSignIn } from "@/lib/auth/server";
 import { getCbsContext } from "@/lib/cbs/queries";
 import { ConnectBanner } from "@/components/connect-banner";
 import { Button } from "@/components/ui/button";
-
-const NAV = [
-  { href: "/", label: "Dashboard" },
-  { href: "/teams", label: "Teams" },
-  { href: "/standings", label: "Standings" },
-  { href: "/pickups", label: "Pickups" },
-  { href: "/settings", label: "Settings" },
-] as const;
+import { NAV } from "@/components/shell/nav";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   await requireSignIn();
