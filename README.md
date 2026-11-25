@@ -13,7 +13,7 @@ A personal dashboard for a CBS fantasy football league: your matchup, your roste
    ```
 
    If you change this key later, the saved token can't be read any more, and you'll need to reconnect CBS.
-4. Set `NEXT_PUBLIC_SITE_URL` to the address you open the app at (default `http://localhost:6972`). The bookmarklet sends you there.
+4. Optional: set `NEXT_PUBLIC_SITE_URL` to the address you open the app at. Left blank, the bookmarklet sends you to the address the Settings page was served from.
 
 ## Run with Docker
 
@@ -41,14 +41,14 @@ Vercel's disk is temporary, so the deployed app keeps its data in [Turso](https:
 
 1. Create the database: `turso db create fantasy-dashboard`, then get its URL (`turso db show fantasy-dashboard --url`) and a token (`turso db tokens create fantasy-dashboard`).
 2. Import the GitHub repo into Vercel and set the production branch to `prod`.
-3. In the Vercel project's settings, add these environment variables: `AUTH_USERNAME`, `AUTH_PASSWORD`, `SESSION_SECRET`, `CBS_TOKEN_KEY`, `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, and `NEXT_PUBLIC_SITE_URL` (the Vercel URL).
+3. In the Vercel project's settings, add these environment variables: `AUTH_USERNAME`, `AUTH_PASSWORD`, `SESSION_SECRET`, `CBS_TOKEN_KEY`, `TURSO_DATABASE_URL`, and `TURSO_AUTH_TOKEN`. Leave `NEXT_PUBLIC_SITE_URL` unset; the bookmarklet uses the deployed address.
 4. Push to `prod` to deploy. The tables are created on the first request. Then connect CBS again with the bookmarklet from the deployed site.
 
 ## Development
 
 ```sh
 npm install
-npm run dev     # http://localhost:3000; set NEXT_PUBLIC_SITE_URL to match
+npm run dev     # http://localhost:3000
 npm test
 npm run lint
 ```
