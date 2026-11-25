@@ -40,7 +40,7 @@ describe("pickup_reports", () => {
   it("allows one report per position, week and player", async () => {
     // Arrange
     const db = await openDatabase(":memory:");
-    const row = "INSERT INTO pickup_reports VALUES ('RB', 11, 'p1', '{}', 'now')";
+    const row = "INSERT INTO pickup_reports (position, period, player_id, report_json, created_at) VALUES ('RB', 11, 'p1', '{}', 'now')";
     await db.execute(row);
 
     // Act & Assert

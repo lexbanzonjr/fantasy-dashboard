@@ -48,7 +48,7 @@ describe("pickup report cache", () => {
   it("skips a row that no longer matches the schema", async () => {
     // Arrange
     const db = await openDatabase(":memory:");
-    await db.execute("INSERT INTO pickup_reports VALUES ('RB', 11, 'bad', '{\"score\":\"x\"}', 'now')");
+    await db.execute("INSERT INTO pickup_reports (position, period, player_id, report_json, created_at) VALUES ('RB', 11, 'bad', '{\"score\":\"x\"}', 'now')");
 
     // Act
     const cached = await getCachedReports("RB", 11, db);
