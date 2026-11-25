@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { requireSignIn } from "@/lib/auth/server";
 import { bookmarkletSource } from "@/lib/cbs/bookmarklet";
 import { getCbsContext } from "@/lib/cbs/queries";
-import { env } from "@/lib/env";
+import { resolveSiteUrl } from "@/lib/site-url";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { disconnectCbs } from "./actions";
@@ -17,6 +17,7 @@ export default async function SettingsPage() {
   await requireSignIn();
   const cbs = await getCbsContext();
   const connection = cbs.status === "disconnected" ? null : cbs.connection;
+  const siteUrl = await resolveSiteUrl();
 
   return (
     <div className="grid gap-6">
@@ -44,7 +45,7 @@ export default async function SettingsPage() {
           )}
           <ol className="grid list-decimal gap-2 pl-5 text-sm">
             <li>
-              Drag this to your bookmarks bar: <BookmarkletLink source={bookmarkletSource(env().siteUrl)} />
+              Drag this to your bookmarks bar: <BookmarkletLink source={bookmarkletSource(siteUrl)} />
             </li>
             <li>Open your CBS league page while signed in to CBS.</li>
             <li>Click the bookmark. This page opens with the league and token filled in. Save.</li>
