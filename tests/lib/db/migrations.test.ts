@@ -40,11 +40,29 @@ describe("pickup_reports", () => {
   it("allows one report per position, week and player", async () => {
     // Arrange
     const db = await openDatabase(":memory:");
-    const row = "INSERT INTO pickup_reports VALUES ('RB', 11, 'p1', '{}', 'now')";
+    const row = "INSERT INTO pickup_reports (position, period, player_id, report_json, created_at) VALUES ('RB', 11, 'p1', '{}', 'now')";
     await db.execute(row);
 
     // Act & Assert
     await expect(db.execute(row)).rejects.toThrow(/UNIQUE|PRIMARY/);
+  });
+});
+
+describe("trace_json migration", () => {
+  it("adds a nullable trace_json column and keeps existing reports", async () => {
+    // Arrange
+    const db = createClient({ url: ":memory:" });
+    await db.execute(MIGRATIONS[0]!);
+    await db.execute(MIGRATIONS[1]!);
+    await db.execute("PRAGMA user_version = 2");
+    await db.execute("INSERT INTO pickup_reports VALUES ('RB', 11, 'p1', '{}', 'now')");
+
+    // Act
+    await migrate(db);
+
+    // Assert
+    const row = (await db.execute("SELECT report_json, trace_json FROM pickup_reports")).rows[0]!;
+    expect(row).toMatchObject({ report_json: "{}", trace_json: null });
   });
 });
 

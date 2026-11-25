@@ -22,4 +22,6 @@ export const MIGRATIONS: string[] = [
     created_at TEXT NOT NULL,
     PRIMARY KEY (position, period, player_id)
   )`,
+  // 3: how the AI reached each report (prompt, web searches, thinking summary). Null on older rows.
+  `ALTER TABLE pickup_reports ADD COLUMN trace_json TEXT`,
 ];
